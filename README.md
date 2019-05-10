@@ -14,7 +14,7 @@ devtools::install_github("zumbov2/swissparl")
 ```
 
 ## Example
-Let's find out how [Cédric Wermuth](https://www.parlament.ch/de/biografie/c%C3%A9dric-wermuth/4057) and [Thomas Aeschi](https://www.parlament.ch/de/biografie/thomas-aeschi/4053) voted on the corporate tax reform (USR III) back in 2016. First, I need to get their IDs.
+Let's find out how [Cédric Wermuth](https://www.parlament.ch/de/biografie/c%C3%A9dric-wermuth/4057) and [Thomas Aeschi](https://www.parlament.ch/de/biografie/thomas-aeschi/4053) voted on the corporate tax reform (USR III) back in 2016. First, we need to get their IDs.
 ```r
 # Fetching all current councillors
 clrs <- swissparl::get_councillors2(current = T)
@@ -24,7 +24,7 @@ ids <- clrs %>%
   dplyr::filter(lastName %in% c("Wermuth", "Aeschi")) %>% 
   dplyr::pull(number)
 ```
-Now I also need the ID of the affair. I remember that the Federal Council presented his bill in 2015.
+Now we also need the ID of the affair. I remember that the Federal Council presented his bill in 2015.
 ```r
 # Fetching bills/affairs of 2015 
 afrs <- swissparl::get_affairs2(year = 2015)
