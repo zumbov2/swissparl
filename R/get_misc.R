@@ -654,3 +654,42 @@ get_sessions <- function(lang = "de", silent = F) {
     dplyr::select(-hasMorePages)
 
 }
+
+#' Retrieve affairs
+#'
+#' \code{get_affairs} retrieves basic information on all affairs of the Swiss Parliament since 1990.
+#'
+#' @importFrom magrittr "%>%"
+#' @importFrom dplyr select
+#'
+#' @param lang specifies language. Available are German ("de"), French ("fr"), Italian ("it") and English ("en").
+#' @param silent if \code{TRUE}, no progress bar is displayed.
+#'
+#' @return A tibble with the following columns:
+#' \itemize{
+#' \item \code{to} end of session.
+#' \item \code{name} language-specific session name.
+#' \item \code{from} start of session.
+#' \item \code{code} code of session.
+#' \item \code{updated} date of last update.
+#' \item \code{id} session ID.
+#' }
+#' @export
+#'
+#' @examples
+#' \donttest{
+#' get_affairs(lang = "fr")
+#' }
+get_affairs <- function(lang = "de", silent = F) {
+
+  # Define page
+  ws_page = "http://ws-old.parlament.ch/affairs"
+
+  # Initiate
+  if (!silent) cat("\n Fetching data from", ws_page, "\n")
+
+  # Data collection
+  get_overview(ws_page = ws_page, lang = lang, silent = silent) %>%
+    dplyr::select(-hasMorePages)
+
+}

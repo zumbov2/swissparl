@@ -61,7 +61,7 @@ get_committee_members <- function(committee_id, lang = "de", silent = F) {
 get_committee_members2 <- function(lang = "de", silent = F) {
 
   # Collecting affair IDs
-  if (!silent) cat("Collecting IDs from http://ws-old.parlament.ch/committees\n")
+  if (!silent) cat("\nCollecting IDs from http://ws-old.parlament.ch/committees\n")
   ids <- get_committees(silent = T)
 
   # Fetching data
@@ -135,7 +135,7 @@ get_faction_members <- function(faction_id, lang = "de", silent = F) {
 get_faction_members2 <- function(lang = "de", silent = F) {
 
   # Collecting affair IDs
-  if (!silent) cat("Collecting IDs from http://ws-old.parlament.ch/committees\n")
+  if (!silent) cat("\nCollecting IDs from http://ws-old.parlament.ch/committees\n")
   ids <- get_factions(silent = T)
 
   # Fetching data

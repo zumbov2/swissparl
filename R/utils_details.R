@@ -218,7 +218,7 @@ get_ids_affairs <- function(lang = "de", silent = F) {
   ws_page = "http://ws-old.parlament.ch/affairs"
 
   # Initiate
-  if (!silent) cat("Collecting ids from", ws_page, "\n")
+  if (!silent) cat("\nCollecting ids from", ws_page, "\n")
 
   # Data collection
   get_overview(ws_page = ws_page, lang = lang, silent = silent) %>%
@@ -234,7 +234,7 @@ get_ids_affairsummaries <- function(lang = "de", silent = F) {
   ws_page = "http://ws-old.parlament.ch/affairsummaries"
 
   # Initiate
-  if (!silent) cat("Collecting ids from", ws_page, "\n")
+  if (!silent) cat("\nCollecting ids from", ws_page, "\n")
 
   # Data collection
   get_overview(ws_page = ws_page, lang = lang, silent = silent) %>%
@@ -261,7 +261,7 @@ get_ids_votes_affairs <- function(
   )
 
   # Initiate
-  if (!silent) cat("Collecting ids from", ws_page, "\n")
+  if (!silent) cat("\nCollecting ids from", ws_page, "\n")
 
   # Data collection
   get_overview(ws_page = ws_page, lang = lang, add = add, silent = silent) %>%
@@ -290,7 +290,7 @@ get_ids_votes_councillors <- function(
   )
 
   # Initiate
-  if (!silent) cat("Collecting ids from", ws_page, "\n")
+  if (!silent) cat("\nCollecting ids from", ws_page, "\n")
 
   # Data collection
   get_overview(ws_page = ws_page, lang = lang, add = add, silent = silent) %>%

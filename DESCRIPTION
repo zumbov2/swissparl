@@ -14,5 +14,5 @@ RoxygenNote: 6.1.0
 Imports: dplyr, httr, jsonlite, magrittr, purrr, rlang, rvest, stringr,
         tibble, xml2
 NeedsCompilation: no
-Packaged: 2019-05-10 12:07:58 UTC; david
+Packaged: 2019-05-10 12:18:27 UTC; david
 Author: David Zumbach [aut, cre]

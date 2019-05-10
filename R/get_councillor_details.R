@@ -66,12 +66,12 @@ get_councillor_details2 <- function(current = FALSE, lang = "de", silent = F) {
   # Collecting IDs
   if (current) {
 
-    if (!silent) cat("Collecting IDs from http://ws-old.parlament.ch/councillors/basicdetails\n")
+    if (!silent) cat("\nCollecting IDs from http://ws-old.parlament.ch/councillors/basicdetails\n")
     ids <- get_councillors(silent = T)
 
   } else {
 
-    if (!silent) cat("Collecting IDs from http://ws-old.parlament.ch/councillors/historic\n")
+    if (!silent) cat("\nCollecting IDs from http://ws-old.parlament.ch/councillors/historic\n")
     ids <- get_councillors_historic(silent = T)
 
   }
