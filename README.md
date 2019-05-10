@@ -47,6 +47,8 @@ vbh %>%
   dplyr::group_by(same) %>% 
   dplyr::count()
 ```
+## I want it all...
+The package offers various wrapper functions that enable the mass retrieval of data: `get_affairs2()`, `get_councillors2()`, `get_affairsummaries2()`, `get_faction_members2()`, `get_committee_members2()`, `get_votes_affairs2()` and `get_votes_councillors2()`.
 
 ## More on Swiss politics 
 - [DigDemLab](https://digdemlab.io/)  
