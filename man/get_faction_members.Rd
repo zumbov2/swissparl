@@ -17,7 +17,7 @@ get_faction_members(faction_id, lang = "de", silent = F)
 A tibble with 22 columns, including \code{canton}, \code{council}, \code{party} and \code{factionFunction}.
 }
 \description{
-\code{get_councillors} retrieves data on faction memberships provided by the WebServices of the Swiss Parliament.
+\code{get_faction_members} retrieves data on faction memberships provided by the WebServices of the Swiss Parliament.
 }
 \examples{
 \donttest{

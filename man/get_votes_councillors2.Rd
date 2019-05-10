@@ -20,6 +20,6 @@ A tibble with 16 columns, including \code{councillorVote.decision}, \code{meanin
 }
 \examples{
 \donttest{
-get_committee_members2()
+get_votes_councillors2()
 }
 }

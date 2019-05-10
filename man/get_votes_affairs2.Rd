@@ -20,6 +20,6 @@ A tibble with 17 columns, including the voting results.
 }
 \examples{
 \donttest{
-get_committee_members2()
+get_votes_affairs2()
 }
 }

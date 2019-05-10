@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_affairsummaries.R
 \name{get_affairsummaries2}
 \alias{get_affairsummaries2}
-\title{Retrieve data on political affairs}
+\title{Retrieve all affair summaries}
 \usage{
 get_affairsummaries2(year = NULL, lang = "de", silent = F)
 }

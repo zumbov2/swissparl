@@ -62,7 +62,7 @@ get_votes_councillors <- function(councillor_id, from = NULL, to = NULL, legisla
 #'
 #' @examples
 #' \donttest{
-#' get_committee_members2()
+#' get_votes_councillors2()
 #' }
 get_votes_councillors2 <- function(lang = "de", silent = F) {
 
@@ -137,7 +137,7 @@ get_votes_affairs <- function(affair_id, lang = "de", silent = F) {
 #'
 #' @examples
 #' \donttest{
-#' get_committee_members2()
+#' get_votes_affairs2()
 #' }
 get_votes_affairs2 <- function(lang = "de", silent = F) {
 

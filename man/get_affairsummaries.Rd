@@ -17,7 +17,7 @@ get_affairsummaries(affair_id, lang = "de", silent = F)
 A tibble with 7 columns, including \code{description}, \code{initialSituation} and \code{proceedings}.
 }
 \description{
-\code{get_affairs} retrieves summaries of political affairs provided by the WebServices of the Swiss Parliament.
+\code{get_affairsummaries} retrieves summaries of political affairs provided by the WebServices of the Swiss Parliament.
 }
 \examples{
 \donttest{

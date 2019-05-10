@@ -17,7 +17,7 @@ get_committee_members(committee_id, lang = "de", silent = F)
 A tibble with 24 columns, including \code{faction}, \code{gender}, \code{language} and \code{committeeFunctionName}.
 }
 \description{
-\code{get_councillors} retrieves data on committee memberships provided by the WebServices of the Swiss Parliament.
+\code{get_committee_members} retrieves data on committee memberships provided by the WebServices of the Swiss Parliament.
 }
 \examples{
 \donttest{

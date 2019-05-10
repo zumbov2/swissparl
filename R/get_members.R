@@ -1,6 +1,6 @@
 #' Retrieve committee memberships
 #'
-#' \code{get_councillors} retrieves data on committee memberships provided by the WebServices of the Swiss Parliament.
+#' \code{get_committee_members} retrieves data on committee memberships provided by the WebServices of the Swiss Parliament.
 #'
 #' @importFrom utils txtProgressBar
 #' @importFrom purrr map2_dfr
@@ -74,7 +74,7 @@ get_committee_members2 <- function(lang = "de", silent = F) {
 
 #' Retrieve faction memberships
 #'
-#' \code{get_councillors} retrieves data on faction memberships provided by the WebServices of the Swiss Parliament.
+#' \code{get_faction_members} retrieves data on faction memberships provided by the WebServices of the Swiss Parliament.
 #'
 #' @importFrom utils txtProgressBar
 #' @importFrom purrr map2_dfr

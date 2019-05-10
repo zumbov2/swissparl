@@ -2,7 +2,7 @@
 #' @importFrom tibble tibble
 #' @importFrom utils setTxtProgressBar
 #' @noRd
-get_affair_details <- function(affair_id, pos, prog_bar, lang, silent) {
+get_affair_detail <- function(affair_id, pos, prog_bar, lang, silent) {
 
   # Define
   ws_page <- paste0("http://ws-old.parlament.ch/affairs/", affair_id, query_lang(lang))
@@ -48,7 +48,7 @@ get_affair_details <- function(affair_id, pos, prog_bar, lang, silent) {
 #' @importFrom tibble tibble
 #' @importFrom utils setTxtProgressBar
 #' @noRd
-get_affairsummaries_details <- function(affair_id, pos, prog_bar, lang, silent) {
+get_affairsummaries_detail <- function(affair_id, pos, prog_bar, lang, silent) {
 
   # Define
   ws_page <- paste0("http://ws-old.parlament.ch/affairsummaries/", affair_id, query_lang(lang))
@@ -81,7 +81,7 @@ get_affairsummaries_details <- function(affair_id, pos, prog_bar, lang, silent) 
 #' @importFrom tibble tibble
 #' @importFrom utils setTxtProgressBar
 #' @noRd
-get_councillor_details <- function(councillor_id, pos, prog_bar, lang, silent) {
+get_councillor_detail <- function(councillor_id, pos, prog_bar, lang, silent) {
 
   # Define
   ws_page <- paste0("http://ws-old.parlament.ch/councillors/", councillor_id, query_lang(lang))

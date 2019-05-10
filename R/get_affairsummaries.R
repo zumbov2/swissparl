@@ -1,6 +1,6 @@
 #' Retrieve affair summaries
 #'
-#' \code{get_affairs} retrieves summaries of political affairs provided by the WebServices of the Swiss Parliament.
+#' \code{get_affairsummaries} retrieves summaries of political affairs provided by the WebServices of the Swiss Parliament.
 #'
 #' @importFrom utils txtProgressBar
 #' @importFrom purrr map2_dfr
@@ -35,14 +35,14 @@ get_affairsummaries <- function(affair_id, lang = "de", silent = F) {
   }
 
   # Fetch data
-  res <- purrr::map2_dfr(affair_id, c(1:length(affair_id)), get_affairsummaries_details, prog_bar = pb, lang = lang, silent = silent)
+  res <- purrr::map2_dfr(affair_id, c(1:length(affair_id)), get_affairsummaries_detail, prog_bar = pb, lang = lang, silent = silent)
 
   # Return
   return(res)
 
 }
 
-#' Retrieve data on political affairs
+#' Retrieve all affair summaries
 #'
 #' \code{get_affairsummaries2} is wrapper around \code{get_affairsummaries} and enables the mass retrieval of
 #'     summaries of political affairs provided by the WebServices of the Swiss Parliament.

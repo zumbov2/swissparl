@@ -25,7 +25,7 @@ get_affair_types <- function(lang = "de", silent = F) {
   ws_page = "http://ws-old.parlament.ch/affairs/types"
 
   # Initiate
-  if (!silent) cat("Fetching data from", ws_page, "\n")
+  if (!silent) cat("\nFetching data from", ws_page, "\n")
 
   # Fetch data
   get_overview(ws_page = ws_page, lang = lang, silent = silent)
@@ -61,7 +61,7 @@ get_affair_states <- function(lang = "de", silent = F) {
   ws_page = "http://ws-old.parlament.ch/affairs/states"
 
   # Initiate
-  if (!silent) cat("Fetching data from", ws_page, "\n")
+  if (!silent) cat("\nFetching data from", ws_page, "\n")
 
   # Fetch data
   get_overview(ws_page = ws_page, lang = lang, silent = silent)
@@ -94,7 +94,7 @@ get_affair_topics <- function(lang = "de", silent = F) {
   ws_page = "http://ws-old.parlament.ch/affairs/topics"
 
   # Initiate
-  if (!silent) cat("Fetching data from", ws_page, "\n")
+  if (!silent) cat("\nFetching data from", ws_page, "\n")
 
   # Fetch data
   get_overview(ws_page = ws_page, lang = lang, silent = silent)
@@ -127,7 +127,7 @@ get_affair_descriptors <- function(lang = "de", silent = F) {
   ws_page = "http://ws-old.parlament.ch/affairs/descriptors"
 
   # Initiate
-  if (!silent) cat("Fetching data from", ws_page, "\n")
+  if (!silent) cat("\nFetching data from", ws_page, "\n")
 
   # Fetch data
   get_overview(ws_page = ws_page, lang = lang, silent = silent)
@@ -171,7 +171,7 @@ get_committees <- function(main = F, permanent = F, current = F, lang = "de", si
   add <-  paste0(query_add_log("mainOnly", main), query_add_log("permanentOnly", permanent), query_add_log("currentOnly", current))
 
   # Initiate
-  if (!silent) cat("Fetching data from", ws_page, "\n")
+  if (!silent) cat("\nFetching data from", ws_page, "\n")
 
   # Fetch data
   get_overview(ws_page = ws_page, lang = lang, add = add, silent = silent) %>%
@@ -209,7 +209,7 @@ get_cantons <- function(lang = "de", silent = F) {
   ws_page = "http://ws-old.parlament.ch/cantons"
 
   # Initiate
-  if (!silent) cat("Fetching data from", ws_page, "\n")
+  if (!silent) cat("\nFetching data from", ws_page, "\n")
 
   # Fetch data
   get_overview(ws_page = ws_page, lang = lang, silent = silent) %>%
@@ -217,9 +217,9 @@ get_cantons <- function(lang = "de", silent = F) {
 
 }
 
-#' Retrieve basic information on current councillors
+#' Retrieve current councillors
 #'
-#' \code{get_councillors_basics} retrieves basic information on the current councillors of the Swiss Parliament.
+#' \code{get_councillors} retrieves the current councillors of the Swiss Parliament.
 #'
 #' @param council specifies council. Use \code{council = "N"} for the National Council and \code{council = "S"} for
 #'     the Council of States to obtain council-specific results.
@@ -241,9 +241,9 @@ get_cantons <- function(lang = "de", silent = F) {
 #'
 #' @examples
 #' \donttest{
-#' get_councillors_basics(lang = "fr")
+#' get_councillors(lang = "fr")
 #' }
-get_councillors_basics <- function(council = NULL, canton = NULL, lang = "de", silent = F) {
+get_councillors <- function(council = NULL, canton = NULL, lang = "de", silent = F) {
 
   # Define page
   ws_page = "http://ws-old.parlament.ch/councillors/basicdetails"
@@ -255,16 +255,16 @@ get_councillors_basics <- function(council = NULL, canton = NULL, lang = "de", s
     )
 
   # Initiate
-  if (!silent) cat("Fetching data from", ws_page, "\n")
+  if (!silent) cat("\nFetching data from", ws_page, "\n")
 
   # Fetch data
   get_overview(ws_page = ws_page, lang = lang, add = add, silent = silent)
 
 }
 
-#' Retrieve historical councillors information
+#' Retrieve all councillors
 #'
-#' \code{get_councillors_historic_basics} retrieves basic information on all councillors in the history of the Swiss Parliament.
+#' \code{get_councillors_historic} retrieves all councillors in the history of the Swiss Parliament.
 #'
 #' @importFrom magrittr "%>%"
 #' @importFrom dplyr select
@@ -288,9 +288,9 @@ get_councillors_basics <- function(council = NULL, canton = NULL, lang = "de", s
 #'
 #' @examples
 #' \donttest{
-#' get_councillors_historic_basics(lang = "fr")
+#' get_councillors_historic(lang = "fr")
 #' }
-get_councillors_historic_basics <- function(
+get_councillors_historic <- function(
   date_of_death_from = NULL, date_of_death_to = NULL, faction = NULL, legislative_period_from = NULL, lang = "de", silent = F) {
 
   # Define page
@@ -305,7 +305,7 @@ get_councillors_historic_basics <- function(
   )
 
   # Initiate
-  if (!silent) cat("Fetching data from", ws_page, "\n")
+  if (!silent) cat("\nFetching data from", ws_page, "\n")
 
   # Fetch data
   get_overview(ws_page = ws_page, lang = lang, add = add, silent = silent) %>%
@@ -340,7 +340,7 @@ get_councils <- function(lang = "de", silent = F) {
   ws_page = "http://ws-old.parlament.ch/councils"
 
   # Initiate
-  if (!silent) cat("Fetching data from", ws_page, "\n")
+  if (!silent) cat("\nFetching data from", ws_page, "\n")
 
   # Fetch data
   get_overview(ws_page = ws_page, lang = lang, silent = silent) %>%
@@ -378,7 +378,7 @@ get_departments <- function(lang = "de", silent = F) {
   ws_page = "http://ws-old.parlament.ch/departments"
 
   # Initiate
-  if (!silent) cat("Fetching data from", ws_page, "\n")
+  if (!silent) cat("\nFetching data from", ws_page, "\n")
 
   # Fetch data
   get_overview(ws_page = ws_page, lang = lang, silent = silent) %>%
@@ -416,7 +416,7 @@ get_departments_historic <- function(lang = "de", silent = F) {
   ws_page = "http://ws-old.parlament.ch/departments/historic"
 
   # Initiate
-  if (!silent) cat("Fetching data from", ws_page, "\n")
+  if (!silent) cat("\nFetching data from", ws_page, "\n")
 
   # Fetch data
   get_overview(ws_page = ws_page, lang = lang, silent = silent) %>%
@@ -455,7 +455,7 @@ get_factions <- function(lang = "de", silent = F) {
   ws_page = "http://ws-old.parlament.ch/factions"
 
   # Initiate
-  if (!silent) cat("Fetching data from", ws_page, "\n")
+  if (!silent) cat("\nFetching data from", ws_page, "\n")
 
   # Fetch data
   get_overview(ws_page = ws_page, lang = lang, silent = silent) %>%
@@ -496,7 +496,7 @@ get_factions_historic <- function(lang = "de", silent = F) {
   ws_page = "http://ws-old.parlament.ch/factions/historic"
 
   # Initiate
-  if (!silent) cat("Fetching data from", ws_page, "\n")
+  if (!silent) cat("\nFetching data from", ws_page, "\n")
 
   # Fetch data
   get_overview(ws_page = ws_page, lang = lang, silent = silent) %>%
@@ -535,7 +535,7 @@ get_legislative_periods <- function(lang = "de", silent = F) {
   ws_page = "http://ws-old.parlament.ch/legislativeperiods"
 
   # Initiate
-  if (!silent) cat("Fetching data from", ws_page, "\n")
+  if (!silent) cat("\nFetching data from", ws_page, "\n")
 
   # Fetch data
   get_overview(ws_page = ws_page, lang = lang, silent = silent) %>%
@@ -573,7 +573,7 @@ get_parties_historic <- function(lang = "de", silent = F) {
   ws_page = "http://ws-old.parlament.ch/parties/historic"
 
   # Initiate
-  if (!silent) cat("Fetching data from", ws_page, "\n")
+  if (!silent) cat("\nFetching data from", ws_page, "\n")
 
   # Fetch data
   get_overview(ws_page = ws_page, lang = lang, silent = silent) %>%
@@ -608,7 +608,7 @@ get_schedules <- function(year = 2010, lang = "de", silent = F) {
   if (check404(ws_page)) stop ("No schedule data available for ", year)
 
   # Initiate
-  if (!silent) cat("Fetching data from", ws_page, "\n")
+  if (!silent) cat("\nFetching data from", ws_page, "\n")
 
   # Fetch data
   get_overview(ws_page = ws_page, lang = lang, silent = silent) %>%
@@ -647,7 +647,7 @@ get_sessions <- function(lang = "de", silent = F) {
   ws_page = "http://ws-old.parlament.ch/sessions"
 
   # Initiate
-  if (!silent) cat("Fetching data from", ws_page, "\n")
+  if (!silent) cat("\nFetching data from", ws_page, "\n")
 
   # Fetch data
   get_overview(ws_page = ws_page, lang = lang, silent = silent) %>%
