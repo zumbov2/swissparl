@@ -47,11 +47,11 @@ vbh %>%
   dplyr::group_by(same) %>% 
   dplyr::count()
 ```
-7 out of 41...there are councillors who vote more similarly. 
+They voted the same in 7 out of 41 cases...there are councillors who vote more similarly. 
 
 ## I want it all...
 The package offers various wrapper functions that enable the mass retrieval of data: see `get_affair_details2()`, `get_councillor_details2()`, `get_affairsummaries2()`, `get_faction_members2()`, `get_committee_members2()`, `get_votes_affairs2()` and `get_votes_councillors2()`.
 
-## More on Swiss politics 
+## More data on Swiss politics 
 - [DigDemLab](https://digdemlab.io/)  
 - [swissdd](https://github.com/politanch/swissdd)
