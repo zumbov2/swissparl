@@ -193,5 +193,3 @@ swissparl::get_data(table = "Business", SubmissionDate = c(">2019-06-30",
 #> #   FirstCouncil2Abbreviation <chr>, TagNames <chr>
 ```
 
-<sup>Created on 2019-12-07 by the [reprex package](https://reprex.tidyverse.org) (v0.2.1)</sup>
-
