@@ -192,4 +192,12 @@ swissparl::get_data(table = "Business", SubmissionDate = c(">2019-06-30",
 #> #   FirstCouncil2 <int>, FirstCouncil2Name <chr>,
 #> #   FirstCouncil2Abbreviation <chr>, TagNames <chr>
 ```
-
+## Extra features
+`ggswissparl` can be used to visualize the results of ballots in the National Council. Since only the current seating arrangement can be retrieved, only the most recent voting results can be displayed correctly.
+``` r
+swissparl::get_data("Voting", Language = "DE", IdVote = 23458) %>% 
+    swissparl::ggswissparl(theme = "scoreboard")
+    
+swissparl::get_data("Voting", Language = "DE", IdVote = 23458) %>% 
+    swissparl::ggswissparl(theme = "poly2")
+```
