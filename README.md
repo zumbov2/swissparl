@@ -80,7 +80,7 @@ swissparl::get_overview(silent = T)
 #> 10 Bill  BusinessTypeAbbreviation
 #> # ... with 675 more rows
 ```
-With `get_glimpse`ou can get a first glimpse into the datasets by downloading the first rows of a given table.
+With `get_glimpse` you can get a first glimpse into the datasets by downloading the first rows of a given table.
 ``` r
 swissparl::get_glimpse("Person", rows = 100)
 #> # A tibble: 100 x 21
