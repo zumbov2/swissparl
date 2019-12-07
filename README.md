@@ -127,7 +127,7 @@ swissparl::get_data("Person", Language = "DE")
 #> #   OfficialName <chr>, MilitaryRank <int>, MilitaryRankText <chr>,
 #> #   NativeLanguage <chr>, NumberOfChildren <int>
 ```
-The function uses ... (ellipsis) and can therefore be used very flexibly. For example, it can be used to download the transcripts of all speeches of a given councillor: 
+The function uses ... (ellipsis) and can therefore be applied very flexibly. For example, it can be used to download the transcripts of all speeches of a given councillor: 
 ``` r
 swissparl::get_data(table = "Transcript", SpeakerLastName = "Blocher", 
     Language = "DE")
@@ -156,7 +156,7 @@ swissparl::get_data(table = "Transcript", SpeakerLastName = "Blocher",
 #> #   EndTimeWithTimezone <dttm>, VoteBusinessNumber <lgl>,
 #> #   VoteBusinessShortNumber <lgl>, VoteBusinessTitle <lgl>
 ```
-Or to fetch detailed information on all political business submitted during a given period:
+Or it can be used to fetch detailed information on all political business submitted during a given period:
 ``` r
 swissparl::get_data(table = "Business", SubmissionDate = c(">2019-06-30", 
     "<2019-12-08"), Language = "DE")
