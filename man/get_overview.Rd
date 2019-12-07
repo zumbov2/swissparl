@@ -2,27 +2,22 @@
 % Please edit documentation in R/get_overview.R
 \name{get_overview}
 \alias{get_overview}
-\title{Retrieve overview data}
+\title{Retrieve overview of all tables and variables}
 \usage{
-get_overview(ws_page, lang = "de", add = NULL, silent = F)
+get_overview(silent = F)
 }
 \arguments{
-\item{ws_page}{url of one of the service pages contained in the menu under \url{http://ws-old.parlament.ch/}.}
-
-\item{lang}{specifies language. Available are German ("de"), French ("fr"), Italian ("it") and English ("en").}
-
-\item{add}{additional query modifiers.}
-
-\item{silent}{if \code{TRUE}, no progress bar is displayed.}
+\item{silent}{if \code{TRUE}, no progress bar and messages are displayed.}
 }
 \value{
-A tibble. The number of columns depends on \code{ws_page}.
+A tibble with the 2 columns \code{table} and \code{variable}.
 }
 \description{
-\code{get_overview} retrieves overview data from the parent entities of the Swiss Parliament WebServices.
+\code{get_overview} retrieves the names of all available tables of the Swiss Parliament WebServices and
+    the variables they contain.
 }
 \examples{
 \donttest{
-get_overview(ws_page = "http://ws-old.parlament.ch/affairs")
+get_overview()
 }
 }

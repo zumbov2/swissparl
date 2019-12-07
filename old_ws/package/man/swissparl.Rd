@@ -3,6 +3,7 @@
 \docType{package}
 \name{swissparl}
 \alias{swissparl}
+\alias{swissparl-package}
 \title{\code{swissparl} package}
 \description{
 The Swiss Parliament Webservices R API

@@ -1,50 +1,47 @@
-#' Retrieve overview data
+#' Retrieve overview of all tables and variables
 #'
-#' \code{get_overview} retrieves overview data from the parent entities of the Swiss Parliament WebServices.
+#' \code{get_overview} retrieves the names of all available tables of the Swiss Parliament WebServices and
+#'     the variables they contain.
 #'
-#' @importFrom purrr map_dfr
-#' @importFrom utils txtProgressBar
-#' @importFrom dplyr select
-#' @importFrom tibble as_tibble
+#' @importFrom tibble tibble
+#' @importFrom purrr map2
+#' @importFrom tidyr unnest
 #' @importFrom magrittr "%>%"
+#' @importFrom utils txtProgressBar
+#' @importFrom crayon silver
 #'
-#' @param ws_page url of one of the service pages contained in the menu under \url{http://ws-old.parlament.ch/}.
-#' @param lang specifies language. Available are German ("de"), French ("fr"), Italian ("it") and English ("en").
-#' @param add additional query modifiers.
-#' @param silent if \code{TRUE}, no progress bar is displayed.
+#' @param silent if \code{TRUE}, no progress bar and messages are displayed.
 #'
-#' @return A tibble. The number of columns depends on \code{ws_page}.
+#' @return A tibble with the 2 columns \code{table} and \code{variable}.
 #'
 #' @export
 #'
 #' @examples
 #' \donttest{
-#' get_overview(ws_page = "http://ws-old.parlament.ch/affairs")
+#' get_overview()
 #' }
-get_overview <- function(ws_page, lang = "de", add = NULL, silent = F) {
+get_overview <- function(silent = F) {
 
-  # URL
-  ws_page <- paste0(ws_page, query_lang(lang))
-  if (!is.null(add)) ws_page <- paste0(ws_page, add)
-
-  # Get number of pages
-  number_of_pages <- get_number_of_pages(ws_page)
+  # Get available tables
+  tables <- get_tables()
 
   # Feedback on progress
-  if (!silent & number_of_pages > 1) {
-
-    pb <- utils::txtProgressBar(1, number_of_pages, style = 3)
-
+  if (!silent) {
+    cat(crayon::silver("\n\n   Fetching data from 'https://ws.parlament.ch/odata.svc/'", "\n\n"))
+    pb <- utils::txtProgressBar(1, length(tables), style = 3)
   } else {
-
     pb <- NULL
-    silent <- T
-
   }
 
-  # Collect pages
-  res <- purrr::map_dfr(1:number_of_pages, get_overview_page, ws_page = ws_page, prog_bar = pb, silent = silent) %>%
-    tibble::as_tibble()
+  # Get variables for each table
+  res <- tibble::tibble(
+    table = tables,
+    variable = purrr::map2(tables, 1:length(tables), get_variables, pb = pb)
+    ) %>%
+    tidyr::unnest(cols = variable)
+
+  # Close Progress Bar
+  if (!silent) close(pb)
 
   # Return
   return(res)
