@@ -4,7 +4,8 @@ Who with whom in the Council of States?
 The function `get_tables` of `swissparl` shows that the
 [Webservices](https://ws.parlament.ch/odata.svc/) contain a table called
 *BusinessRole*. By using the `get_glimpse` function, we see that the
-table contains data on the role of politicians in businesses.
+table ittself contains data on the role of councillors in political 
+businesses.
 
 ``` r
 glimpse_br <- swissparl::get_glimpse("BusinessRole", rows = 1000)
@@ -18,20 +19,19 @@ table(glimpse_br$RoleName)
 | Sprecher(-in)		| 8		|
 | Urheber(-in)		| 84		|
 
-In the first 1000 rows we find four different roles: authors,
-co-signers, speakers and combatants. We want to use this information to
-get an idea of who frequently collaborated with whom in the Council of
-States in the past legislature period (December 2015 to November 2019).
+In the first 1000 rows we find four different roles: combatants, co-signers, 
+speakers and authors. We want to use this information to
+get an idea of *who has frequently collaborated with whom in the last term
+in the Council of States (December 2015 to November 2019)*.
 
 Businesses of the 50th Legislative Period
 -----------------------------------------
 
 As a first step, we have to find out which businesses and proposals were
-submitted to the Council during this period. For this we use the
-function `get_data` in such a way that only the corresponding businesses
-are downloaded. We get the names and values of the necessary variables
+submitted during this period. For this we use the function `get_data`
+in such a way that only the corresponding businesses are downloaded.
+We get the names and values of the necessary variables
 with `get_glimpse("Business")`.
-
 ``` r
 biz <- swissparl::get_data(
   table = "Business", 
@@ -41,14 +41,12 @@ biz <- swissparl::get_data(
   )
 ```
 ### Explorative Data Analysis, Pt. I
-
 *732* entries were found. Let’s get to know them better:
-
 ``` r
 # Packages
-require(dplyr)
-require(ggplot2)
-require(hrbrthemes)
+library(dplyr)
+library(ggplot2)
+library(hrbrthemes)
 
 # Plot by type
 biz %>% 
@@ -72,7 +70,7 @@ biz %>%
 [Interpellations](https://www.parlament.ch/en/%C3%BCber-das-parlament/parlamentsw%C3%B6rterbuch/parlamentsw%C3%B6rterbuch-detail?WordId=116)
 and
 [Motions](https://www.parlament.ch/en/%C3%BCber-das-parlament/parlamentsw%C3%B6rterbuch/parlamentsw%C3%B6rterbuch-detail?WordId=146)
-are by far the most frequently used business types in the Council of
+were by far the most frequently used business types in the Council of
 States.
 
 ``` r
@@ -139,9 +137,9 @@ biz.roles %>%
 ![](images/g7-1.png)
 
 *702* authorships are matched by *3804* co-signatures (on average 5.4).
-The table does not include the names of the authors and co-signatories.
+The table does not include the names of the authors and co-signers.
 We have to find another way to get them. `get_tables` tells us that the
-Webservices contain named *MemberCouncil*. We try our luck.
+Webservices contain a table named *MemberCouncil*. We try our luck.
 
 ``` r
 council.members <- swissparl::get_data(
@@ -194,8 +192,8 @@ Network Analysis
 ----------------
 
 Now that we have the necessary data, we want to address the question of
-who collaborated with whom, and how often? We use the method of social
-network analysis.
+who collaborated with whom, and how often? We use the method of [social
+network analysis](https://en.wikipedia.org/wiki/Social_network_analysis).
 
 In order to do this, we must first find out who co-signed how often in
 whose proposals. We split the authors and the co-signers into two
@@ -244,6 +242,8 @@ edges <- acp %>%
 ### Explorative Data Analysis, Pt. IV
 
 ``` r
+library(tidyr)
+
 edges %>%
   complete(from, to, fill = list(n = 0)) %>% 
   ggplot(aes(n)) +
@@ -283,18 +283,21 @@ Now we create a network object using `tidygraph`, which is called a
 the nodes tibble we just created.
 
 ``` r
-cs50 <- tidygraph::tbl_graph(
+library(tidygraph)
+
+cs50 <- tbl_graph(
   nodes = nodes %>% mutate(ID = as.character(ID)), 
   edges = edges %>% mutate_at(vars(from, to), as.character), 
   directed = F
   )
 ```
-Finally We can plot our network with the awesome package `ggraph` - an
-extension of ggplot2. We use the so-called [eigenvector
+Finally We can plot our network with the awesome package [`ggraph`](https://github.com/thomasp85/ggraph) - an extension of ggplot2. We use the so-called [eigenvector
 centrality](https://en.wikipedia.org/wiki/Eigenvector_centrality) to
 highlight the influence of a node/councillor.
 
 ``` r
+library(ggraph)
+
 cs50 %>%
   mutate(importance = tidygraph::centrality_eigen(weights = n)) %>%
   mutate(label = paste0(LastName, " (", CantonAbbreviation, ")")) %>% 
