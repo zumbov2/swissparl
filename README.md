@@ -1,4 +1,4 @@
-[![Lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)]
+![Lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
 [![Build Status](https://travis-ci.org/zumbov2/swissparl.svg?branch=master)](https://travis-ci.org/zumbov2/swissparl)
 [![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
