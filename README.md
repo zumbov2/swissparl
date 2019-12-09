@@ -3,7 +3,7 @@
 
 # `swissparl`
 ## The Swiss Parliament Webservices R API
-This R package prototype is an interface to the new and not yet documented [Webservices](https://ws.parlament.ch/odata.svc/) of [The Federal Assembly — The Swiss Parliament](https://www.parlament.ch/en) that offer an open, machine-readable interface to the most important data on parliamentary activities. The previous version of the package (interface to the old Webservices) can be found [here](https://github.com/zumbov2/swissparl/tree/master/old_ws).
+This R package prototype is an interface to the new, still unofficial and accordingly still undocumented [Webservices](https://ws.parlament.ch/odata.svc/) of [The Federal Assembly — The Swiss Parliament](https://www.parlament.ch/en) that offer an open, machine-readable interface to the most important data on parliamentary activities. The previous version of the package (interface to the old Webservices) can be found [here](https://github.com/zumbov2/swissparl/tree/master/old_ws).
 
 ## Installation
 ```r
@@ -127,7 +127,7 @@ swissparl::get_data("Person", Language = "DE")
 #> #   OfficialName <chr>, MilitaryRank <int>, MilitaryRankText <chr>,
 #> #   NativeLanguage <chr>, NumberOfChildren <int>
 ```
-The function uses ... (ellipsis) and can therefore be applied very flexibly. For example, it can be used to download the transcripts of all speeches of a given councillor: 
+The function uses ... (ellipsis) to subset tables and can therefore be applied very flexibly. For example, it can be used to download all speech transcripts of a given councillor: 
 ``` r
 swissparl::get_data(table = "Transcript", SpeakerLastName = "Blocher", 
     Language = "DE")
