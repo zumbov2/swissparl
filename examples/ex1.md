@@ -4,7 +4,7 @@ Who with whom in the Council of States?
 The function `get_tables` of `swissparl` shows that the
 [Webservices](https://ws.parlament.ch/odata.svc/) contain a table called
 *BusinessRole*. By using the `get_glimpse` function, we see that the
-table ittself contains data on the role of councillors in political 
+table itself contains data on the role of councillors in political 
 businesses.
 
 ``` r
@@ -368,7 +368,7 @@ the liberal Raphaël Comte from the canton of Neuchâtel, who apparently
 often worked together with council members from the nearby cantons of
 Fribourg and Jura.
 
-Among the most influential council members (according to eigenvector
-centrality) were Claude Hêche, Anne Seydoux-Christe and Didier Berberat
-from French-speaking Switzerland and Damian Müller, Erich Ettlin and
-Joachim Eder all from central Swiss cantons.
+The importance also shows a geographical pattern: Among the most influential 
+council members (according to eigenvector centrality) were Claude Hêche, 
+Anne Seydoux-Christe and Didier Berberat from French-speaking Switzerland
+and Damian Müller, Erich Ettlin and Joachim Eder all from central Swiss cantons.
