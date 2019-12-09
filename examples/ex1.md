@@ -362,13 +362,12 @@ cs50_2 %>%
 ```
 ![](images/g18-1.png)
 
-As was to be expected, cooperation took place primarily within the
-parties and the political camps. **But there were exceptions**: For example,
+As was to be expected, cooperation took place primarily within parties/political camps. **But there were exceptions**: For example,
 the liberal Raphaël Comte from the canton of Neuchâtel, who apparently
-often worked together with council members from the nearby cantons of
+often cooperated with council members from the nearby cantons of
 Fribourg and Jura.
 
-The importance also shows a **geographical pattern**: Among the most influential 
+The measure of importance also shows a **geographical pattern**: Among the most influential 
 council members (according to eigenvector centrality) were Claude Hêche, 
 Anne Seydoux-Christe and Didier Berberat from French-speaking Switzerland
 and Damian Müller, Erich Ettlin and Joachim Eder all from central Swiss cantons.
