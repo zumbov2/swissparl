@@ -313,8 +313,8 @@ cs50 %>%
 In this first simple network 3 councillors stand out: Verena Diener Lenz
 (glp, ZH), Benedikt Würth (CVP, SG) and Daniel Fässler (CVP, AI). After
 a short research it turns out why: They all served only for a short part
-of the 50th legislative period in the Council. For this reason, they are
-excluded from the rest of the analysis.
+of the 50th legislative period. For this reason, they are excluded from 
+the rest of the analysis.
 
 ``` r
 nodes2 <- nodes %>% 
@@ -363,7 +363,7 @@ cs50_2 %>%
 ![](images/g18-1.png)
 
 As was to be expected, cooperation took place primarily within the
-parties and the political camps. But there were exceptions: For example,
+parties and the political camps. **But there were exceptions**: For example,
 the liberal Raphaël Comte from the canton of Neuchâtel, who apparently
 often worked together with council members from the nearby cantons of
 Fribourg and Jura.
