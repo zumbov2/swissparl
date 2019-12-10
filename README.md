@@ -157,7 +157,7 @@ swissparl::get_data(table = "Transcript", SpeakerLastName = "Blocher",
 #> #   EndTimeWithTimezone <dttm>, VoteBusinessNumber <lgl>,
 #> #   VoteBusinessShortNumber <lgl>, VoteBusinessTitle <lgl>
 ```
-Or it can be used to fetch detailed information on all political business submitted during a given period:
+Or it can be used to fetch detailed information on all political businesses submitted during a given period:
 ``` r
 swissparl::get_data(table = "Business", SubmissionDate = c(">2019-06-30", 
     "<2019-12-08"), Language = "DE")
