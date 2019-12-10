@@ -1,4 +1,4 @@
-Who with whom in the Council of States?
+Who with Whom in the Council of States?
 =======================================
 
 The function `get_tables` of `swissparl` shows that the
@@ -99,8 +99,8 @@ We see that not only individual councillors are launching businesses,
 but also commissions. The missing values are likely to be due to
 businesses of the Federal Council or the Council Office.
 
-Businesses Roles
-----------------
+Business Roles
+--------------
 
 Now that we have all the businesses for the desired period, we can
 download the associated business roles using `get_data`.
