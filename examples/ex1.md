@@ -338,13 +338,25 @@ edges2 <- edges %>%
 cs50_2 <- tidygraph::tbl_graph(nodes = nodes2, edges = edges2, directed = F)
 ```
 
-New try:
+New try with party colors:
 
 ``` r
-# For reproducibility reasons
-set.seed(15)
+# Get party colors
+logos <- c(
+  "https://upload.wikimedia.org/wikipedia/commons/5/55/Logo_der_Sozialdemokratischen_Partei_der_Schweiz_2009.svg",
+  "https://upload.wikimedia.org/wikipedia/de/3/32/SVP.svg",
+  "https://upload.wikimedia.org/wikipedia/commons/b/b6/Logo-CVP.svg",
+  "https://upload.wikimedia.org/wikipedia/commons/4/41/Logo_FDP_Die_Liberalen_de.svg",
+  "https://upload.wikimedia.org/wikipedia/commons/3/3e/GPS-logo-defr-green.png",
+  "https://upload.wikimedia.org/wikipedia/commons/e/e8/BDP_Logo.svg"
+  )
+
+get_main_color <- function(x) colorfindr::get_colors(x) %>% slice(1) %>% pull(col_hex)
+colors <- c(purrr::map_chr(logos, get_main_color), "grey50")
 
 # Network plot
+set.seed(15) # For reproducibility reasons
+
 cs50_2 %>%
   mutate(party = factor(PartyAbbreviation, levels = c("SP", "SVP", "CVP", "FDP-Liberale", "GPS", "BDP", "-"))) %>% 
   mutate(importance = tidygraph::centrality_eigen(weights = n)) %>%
