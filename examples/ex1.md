@@ -367,7 +367,7 @@ cs50_2 %>%
   scale_edge_alpha(range = c(0.001, 1)) +
   geom_node_point(aes(size = importance^2, color = party)) +
   geom_node_text(aes(label = label), size = 2, nudge_y = -0.08) +
-  scale_color_manual(values = c("#EE2A3B", "#3F7B17", "#FF850C", "#104fa0", "#85B229", "#FFDD00", "grey50")) +
+  scale_color_manual(values = colors) +
   scale_size(range = c(0.1, 10)) +
   labs(
     title = "Who with Whom in the Council of States?",
