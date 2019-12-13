@@ -32,6 +32,19 @@ biz %>%
   knitr::kable()
 ```
 
+| BusinessTypeName            |      n|
+|:----------------------------|------:|
+| Interpellation              |  11049|
+| Motion                      |   8922|
+| Postulat                    |   4283|
+| Anfrage                     |   2001|
+| Einfache Anfrage            |   1112|
+| Dringliche Interpellation   |    215|
+| Dringliche Einfache Anfrage |    181|
+| Dringliche Anfrage          |     82|
+| Empfehlung                  |     73|
+| Fragestunde. Frage          |      2|
+
 **Quite a workload!**
 
 Now we are interested in how good the Federal Council was at working
@@ -53,6 +66,9 @@ get_unanswered_requests <- function(date, dt) {
   
 } 
 ```
+
+Length of the To-Do List
+------------------------
 
 We now apply this function to our data in a *weekly* rhythm (always on
 Sundays). Unanswered requests are no longer taken into account after one
@@ -108,6 +124,9 @@ unanswered_requests %>%
 
 ![](img3/g5-1.png)
 
+Response Time
+-------------
+
 Not surprisingly, there is a trend. After all, the number of requests
 has increased steadily over the last few years. Has this had an impact
 on the duration required by the Federal Council to respond to the
@@ -161,6 +180,9 @@ workload. On the contrary, it seems that the Federal Council has become
 **more efficient** in the last two decades. *What influence did this
 have on the length and the complexity of the answers?*
 
+Response Length
+---------------
+
 ``` r
 library(tokenizers)
 
@@ -194,6 +216,9 @@ biz2 %>%
 On average, the Federal Council’s responses appear to have been somewhat
 shorter for 3 out of 4 types. However, the difference between the
 legislative periods is marginal.
+
+Response Complexity
+-------------------
 
 ``` r
 library(quanteda)

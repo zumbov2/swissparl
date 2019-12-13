@@ -26,7 +26,7 @@ biz <- swissparl::get_data("Business", Language = "DE")
 
 The dataset contains the **46,116 businesses** that the Swiss Parliament has dealt with over the past 20 years. Let's find out how often the Federal Council has handled/answered procedural requests since 1999.
 
-```{r g2, eval=F}
+```{r g2}
 biz %>%
   filter(!is.na(FederalCouncilProposal)) %>% 
   group_by(BusinessTypeName) %>% 
@@ -54,6 +54,7 @@ get_unanswered_requests <- function(date, dt) {
 } 
 ```
 
+## Length of the To-Do List 
 We now apply this function to our data in a *weekly* rhythm (always on Sundays). Unanswered requests are no longer taken into account after one year.
 
 ```{r g4}
@@ -102,6 +103,8 @@ unanswered_requests %>%
   theme(panel.grid.minor = element_blank())
 ```
 
+## Response Time
+
 Not surprisingly, there is a trend. After all, the number of requests has increased steadily over the last few years. Has this had an impact on the duration required by the Federal Council to respond to the councillors' demands?  
 
 ```{r g6}
@@ -147,6 +150,8 @@ biz2 %>%
 
 The response time does not seem to have increased despite the greater workload. On the contrary, it seems that the Federal Council has become **more efficient** in the last two decades. *What influence did this have on the length and the complexity of the answers?*
 
+## Response Length
+
 ```{r g7}
 library(tokenizers)
 
@@ -176,6 +181,8 @@ biz2 %>%
 ```
 
 On average, the Federal Council's responses appear to have been somewhat shorter for 3 out of 4 types. However, the difference between the legislative periods is marginal.
+
+## Response Complexity
 
 ```{r g8}
 library(quanteda)
