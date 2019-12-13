@@ -71,7 +71,7 @@ biz %>%
   theme(axis.title = element_blank())
 ```
 
-![](images/g4-1.png)
+![](img1/g4-1.png)
 
 [Interpellations](https://www.parlament.ch/en/%C3%BCber-das-parlament/parlamentsw%C3%B6rterbuch/parlamentsw%C3%B6rterbuch-detail?WordId=116)
 and
@@ -99,7 +99,7 @@ biz %>%
   theme(axis.title = element_blank())
 ```
 
-![](images/g5-1.png)
+![](img1/g5-1.png)
 
 We see that not only individual councillors launched businesses, but
 also commissions. The missing values come from political businesses that
@@ -142,7 +142,7 @@ biz.roles %>%
   theme(axis.title = element_blank())
 ```
 
-![](images/g7-1.png)
+![](img1/g7-1.png)
 
 **702 authorships** are matched by **3804 co-signatures** (*on average
 5.4*). The table does not include neither the names of the authors nor
@@ -193,7 +193,7 @@ biz.roles %>%
   theme_ipsum_rc()
 ```
 
-![](images/g10-1.png)
+![](img1/g10-1.png)
 
 There seems to be a great variance in the way council members “live”
 their mandate.
@@ -269,7 +269,7 @@ edges %>%
   theme(panel.grid.minor = element_blank())
 ```
 
-![](images/g13-1.png)
+![](img1/g13-1.png)
 
 If we take into account the implicitly missing values in our data, it
 turns out that very often there was *no cooperation* (\~41 percent). On
@@ -317,7 +317,7 @@ cs50 %>%
     theme(legend.position = "none")
 ```
 
-![](images/g16-1.png)
+![](img1/g16-1.png)
 
 In this first simple network 3 councillors stand out: **Verena Diener
 Lenz (glp, ZH)**, **Benedikt Würth (CVP, SG)** and **Daniel Fässler
@@ -338,25 +338,13 @@ edges2 <- edges %>%
 cs50_2 <- tidygraph::tbl_graph(nodes = nodes2, edges = edges2, directed = F)
 ```
 
-New try with party colors:
+New try:
 
 ``` r
-# Get party colors
-logos <- c(
-  "https://upload.wikimedia.org/wikipedia/commons/5/55/Logo_der_Sozialdemokratischen_Partei_der_Schweiz_2009.svg",
-  "https://upload.wikimedia.org/wikipedia/de/3/32/SVP.svg",
-  "https://upload.wikimedia.org/wikipedia/commons/b/b6/Logo-CVP.svg",
-  "https://upload.wikimedia.org/wikipedia/commons/4/41/Logo_FDP_Die_Liberalen_de.svg",
-  "https://upload.wikimedia.org/wikipedia/commons/3/3e/GPS-logo-defr-green.png",
-  "https://upload.wikimedia.org/wikipedia/commons/e/e8/BDP_Logo.svg"
-  )
-
-get_main_color <- function(x) colorfindr::get_colors(x) %>% slice(1) %>% pull(col_hex)
-colors <- c(purrr::map_chr(logos, get_main_color), "grey50")
+# For reproducibility reasons
+set.seed(15)
 
 # Network plot
-set.seed(15) # For reproducibility reasons
-
 cs50_2 %>%
   mutate(party = factor(PartyAbbreviation, levels = c("SP", "SVP", "CVP", "FDP-Liberale", "GPS", "BDP", "-"))) %>% 
   mutate(importance = tidygraph::centrality_eigen(weights = n)) %>%
@@ -384,7 +372,7 @@ cs50_2 %>%
     )
 ```
 
-![](images/g18-1.png)
+![](img1/g18-1.png)
 
 As was to be expected, cooperation took place primarily within
 parties/political camps. **But there were exceptions**: For example, the
