@@ -124,13 +124,13 @@ unanswered_requests %>%
 
 ![](img3/g5-1.png)
 
+Not surprisingly, there is a trend. After all, the number of requests
+has increased steadily over the last few years. *Has this had an impact
+on the duration required by the Federal Council to respond to the
+councillors’ demands?*
+
 Response Time
 -------------
-
-Not surprisingly, there is a trend. After all, the number of requests
-has increased steadily over the last few years. Has this had an impact
-on the duration required by the Federal Council to respond to the
-councillors’ demands?
 
 ``` r
 library(lubridate)
