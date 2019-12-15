@@ -1,12 +1,12 @@
 Package: swissparl
 Type: Package
-Title: Interface to the 'Webservices' of the Swiss Parliament
+Title: Interface to the Webservices of the Swiss Parliament
 Version: 0.2.0
 Authors@R: 
     c(person("David", "Zumbach", , "david.zumbach@gfzb.ch", c("aut", "cre")),
     person("Benjamin", "Gföhler", role = "ctb"))
 Description: Retrieves the most important data on parliamentary activities of the Swiss Federal Assembly via 
-    an open, machine-readable interface. 
+    an open, machine-readable interface (see <https://ws.parlament.ch/odata.svc/>). 
 URL: https://www.parlament.ch/en/services/open-data-webservices
 BugReports: https://github.com/zumbov2/swissparl/issues
 License: GPL (>= 2)
@@ -16,7 +16,7 @@ RoxygenNote: 7.0.2
 Imports: dplyr, jsonlite, magrittr, purrr, stringr, tibble, tidyr,
         lubridate, crayon, httr, ggplot2
 NeedsCompilation: no
-Packaged: 2019-12-07 21:24:59 UTC; david
+Packaged: 2019-12-15 16:34:52 UTC; david
 Author: David Zumbach [aut, cre],
   Benjamin Gföhler [ctb]
 Maintainer: David Zumbach <david.zumbach@gfzb.ch>
