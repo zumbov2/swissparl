@@ -53,9 +53,9 @@ any given time how many requests the Federal Council has not yet
 answered.
 
 ``` r
-get_unanswered_requests <- function(date, dt) {
+get_unanswered_requests <- function(date, x) {
   
-  dt %>% 
+  x %>% 
     mutate(open = ifelse(date >= SubmissionDate & date < FederalCouncilProposalDate, 1, 0)) %>% 
     group_by(open) %>% 
     count() %>% 
@@ -81,17 +81,23 @@ sundays <- seq.Date(lubridate::ymd("2000-01-02"), Sys.Date(), "week")
 # Dataset 
 requests <- biz %>%
   filter(BusinessTypeName %in% c("Interpellation", "Motion", "Postulat")) %>% 
-  mutate(FederalCouncilProposalDate = ifelse(is.na(FederalCouncilProposalDate), SubmissionDate + 365, FederalCouncilProposalDate))
+  mutate(
+    FederalCouncilProposalDate = ifelse(
+      is.na(FederalCouncilProposalDate),
+      SubmissionDate + 365,
+      FederalCouncilProposalDate
+      )
+    )
 
 # Unanswered requests  
-unanswered_requests <- purrr::map_dfr(sundays, get_unanswered_requests, dt = requests)
+unanswered_requests <- purrr::map_dfr(sundays, get_unanswered_requests, x = requests)
 
 # Plot
 library(tsbox)
 library(ggplot2)
 library(hrbrthemes)
 
-unanswered_requests %>% 
+p <- unanswered_requests %>% 
   ts_ggplot() + 
   labs(
     title = "The Federal Council's To-Do List",
@@ -101,33 +107,34 @@ unanswered_requests %>%
     ) +
   theme_ipsum_rc() +
   theme(panel.grid.minor = element_blank())
+
+p
 ```
 
 ![](img3/g4-1.png)
 
-It’s oscillating pretty strong. Let’s see if there’s a trend.
+That is what you call *oscillation*! Let’s see if there’s a trend.
 
 ``` r
-unanswered_requests %>% 
-  ts_trend %>% 
-  ts_ggplot() +
-  scale_y_continuous(limits = c(0, 300)) +
-  labs(
-    title = "The Federal Council's To-Do List",
-    subtitle = "Loess-Based Trend Estimation of Unanswered Procedural Requests",
-    caption = "Data: Parliamentary Services of the Federal Assembly, Bern",
-    y = "Unanswered Requests"
-    ) +
-  theme_ipsum_rc() +
-  theme(panel.grid.minor = element_blank())
+# Trend
+trend <- ts_trend(unanswered_requests)
+
+# Plot
+p + geom_line(
+  data = trend,
+  aes(x = Date, y = n),
+  size = 2,
+  color = "red"
+  ) +
+  labs(subtitle = "Loess-Based Trend Estimation of Unanswered Procedural Requests")
 ```
 
 ![](img3/g5-1.png)
 
 Not surprisingly, there is a trend. After all, the number of requests
-has increased steadily over the last few years. *Has this had an impact
+has increased steadily over the last few years. Has this had an impact
 on the duration required by the Federal Council to respond to the
-councillors’ demands?*
+councillors’ demands?
 
 Response Time
 -------------
