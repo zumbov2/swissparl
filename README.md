@@ -196,14 +196,17 @@ swissparl::get_data(table = "Business", SubmissionDate = c(">2019-06-30",
 ```
 ## Extra features
 The function `ggswissparl` uses the in-built data frame `seating_plan` (based on the the [schematic representation of the National Council Hall](https://www.parlament.ch/en/organe/national-council/groups-chamber-nc)) to visualize the results of ballots in the National Council. Since only the current seating arrangement can be retrieved from the API, only the most recent voting results can be displayed correctly.
+
 ``` r
 swissparl::get_data("Voting", Language = "DE", IdVote = 23458) %>% 
     swissparl::ggswissparl(theme = "scoreboard")
-    
+```
+<img src="https://github.com/zumbov2/swissparl/blob/master/plots/scoreboard.png" width="500">  
+
+``` r
 swissparl::get_data("Voting", Language = "DE", IdVote = 23458) %>% 
     swissparl::ggswissparl(theme = "poly2")
 ```
-<img src="https://github.com/zumbov2/swissparl/blob/master/plots/scoreboard.png" width="500">  
 <img src="https://github.com/zumbov2/swissparl/blob/master/plots/poly2.png" width="500">  
 
 `clean_text` clears all texts of line breaks and all non-text-relevant annotations (page numbers).
