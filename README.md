@@ -17,7 +17,8 @@ devtools::install_github("zumbov2/swissparl")
 ## Helpers
 The new [Webservices](https://ws.parlament.ch/odata.svc/) are comprehensive and not yet documented. The following functions will help you make friends with them:
 
-`get_tables` retrieves the names of all available tables or datasets (currently 43).
+### `get_tables`
+Retrieves the names of all available tables or datasets (currently 43).
 ``` r
 swissparl::get_tables()
 #>  [1] "Bill"                   "BillLink"              
@@ -43,7 +44,8 @@ swissparl::get_tables()
 #> [41] "Transcript"             "Vote"                  
 #> [43] "Voting"
 ```
-`get_variables` retrieves the names of all the variables of a given table.
+### `get_variables` 
+Retrieves the names of all the variables of a given table.
 ``` r
 swissparl::get_variables("Transcript")
 #>  [1] "CantonAbbreviation"         "CantonId"                  
@@ -64,7 +66,8 @@ swissparl::get_variables("Transcript")
 #> [31] "VoteBusinessNumber"         "VoteBusinessShortNumber"   
 #> [33] "VoteBusinessTitle"          "VoteId"
 ```
-`get_overview` wraps around `get_tables` and `get_variables` and retrieves all available tables and variables. 
+### `get_overview` 
+Wraps around `get_tables` and `get_variables` and retrieves all available tables and variables. 
 ``` r
 swissparl::get_overview(silent = T)
 #> # A tibble: 685 x 2
@@ -82,7 +85,8 @@ swissparl::get_overview(silent = T)
 #> 10 Bill  BusinessTypeAbbreviation
 #> # ... with 675 more rows
 ```
-With `get_glimpse` you can get a first glimpse into the datasets by downloading the first rows of a given table.
+### `get_glimpse`
+Downloads the first rows of a given table and gives a first insight into the data structure.
 ``` r
 swissparl::get_glimpse("Person", rows = 100)
 #> # A tibble: 100 x 21
@@ -105,7 +109,7 @@ swissparl::get_glimpse("Person", rows = 100)
 #> #   OfficialName <chr>, MilitaryRank <int>, MilitaryRankText <chr>,
 #> #   NativeLanguage <chr>, NumberOfChildren <lgl>
 ```
-## Main function
+## Main function `get_data`
 The main function of the package is `get_data`. It can be used to download entire datasets or selected rows from any available table.
 ``` r
 swissparl::get_data("Person", Language = "DE")
@@ -195,6 +199,7 @@ swissparl::get_data(table = "Business", SubmissionDate = c(">2019-06-30",
 #> #   FirstCouncil2Abbreviation <chr>, TagNames <chr>
 ```
 ## Extra features
+### `ggswissparl`
 The function `ggswissparl` uses the in-built data frame `seating_plan` (based on the the [schematic representation of the National Council Hall](https://www.parlament.ch/en/organe/national-council/groups-chamber-nc)) to visualize the results of ballots in the National Council. Since only the current seating arrangement can be retrieved from the API, only the most recent voting results can be displayed correctly.
 
 ``` r
@@ -209,7 +214,8 @@ swissparl::get_data("Voting", Language = "DE", IdVote = 23458) %>%
 ```
 <img src="https://github.com/zumbov2/swissparl/blob/master/plots/poly2.png" width="500">  
 
-`clean_text` clears all texts of line breaks and all non-text-relevant annotations (page numbers).
+### `clean_text`
+Clears all texts of line breaks and all non-text-relevant annotations (page numbers).
 
 ``` r
 swissparl::get_data("Transcript", Language = "DE", ID = 112146) %>%
