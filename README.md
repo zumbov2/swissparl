@@ -8,6 +8,14 @@
 This R package prototype is an interface to the new, still unofficial and accordingly still undocumented [Webservices](https://ws.parlament.ch/odata.svc/) of [The Federal Assembly — The Swiss Parliament](https://www.parlament.ch/en) that offer an open, machine-readable interface to the most important data on parliamentary activities. The previous version of the package (interface to the old Webservices) can be found [here](https://github.com/zumbov2/swissparl/tree/master/old_ws).
 
 ## Installation
+Version 0.2.0 is on CRAN and can be installed as follows:
+
+```r
+install.packages("swissparl")
+```
+
+The latest version is available on GitHub (0.2.0):
+
 ```r
 install.packages("devtools")
 devtools::install_github("zumbov2/swissparl")
