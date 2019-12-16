@@ -141,6 +141,7 @@ swissparl::get_data("Person", Language = "DE")
 #> #   OfficialName <chr>, MilitaryRank <int>, MilitaryRankText <chr>,
 #> #   NativeLanguage <chr>, NumberOfChildren <int>
 ```
+### Subsetting with ...
 The function uses ... (ellipsis) to subset tables and can therefore be applied very flexibly. For example, it can be used to download all speech transcripts of a given councillor: 
 ``` r
 swissparl::get_data(table = "Transcript", SpeakerLastName = "Blocher", 
@@ -206,6 +207,8 @@ swissparl::get_data(table = "Business", SubmissionDate = c(">2019-06-30",
 #> #   FirstCouncil2 <int>, FirstCouncil2Name <chr>,
 #> #   FirstCouncil2Abbreviation <chr>, TagNames <chr>
 ```
+
+### Advice for large queries
 Large queries (especially the tables *Voting* and *Transcripts*) may result in **server-side errors** (*500 Internal Server Error*). In these cases it is recommended to download the data in smaller batches, save the individual blocks and combine them after the download. The following code snippet is from example 5, where all votes of the 50th legislature period are downloaded, session by session.
 
 ``` r
