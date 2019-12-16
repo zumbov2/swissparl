@@ -206,6 +206,34 @@ swissparl::get_data(table = "Business", SubmissionDate = c(">2019-06-30",
 #> #   FirstCouncil2 <int>, FirstCouncil2Name <chr>,
 #> #   FirstCouncil2Abbreviation <chr>, TagNames <chr>
 ```
+Large queries (especially the tables *Voting* and *Transcripts*) may result in **server-side errors** (*500 Internal Server Error*). In these cases it is recommended to download the data in smaller batches, save the individual blocks and combine them after the download. The following code snippet is from example 5, where all votes of the 50th legislature period are downloaded, session by session.
+
+``` r
+# Get Session IDs
+sessions50 <- swissparl::get_data("Session", Language = "DE", LegislativePeriodNumber = 50)
+
+# Define Function
+get_voting_buffered <- function(id) {
+  
+  # Create folder
+  folder <- "voting50"
+  if(!dir.exists(folder)) dir.create(folder)
+  
+  # Download
+  dt <- swissparl::get_data("Voting", Language = "DE", IdSession = id)
+  
+  # Save
+  saveRDS(dt, paste0(folder, "/", id, ".rds"))
+  
+}
+
+# Apply Function to Session IDs
+purrr::walk(sessions50$ID, get_voting_buffered)
+
+# Combine to One Dataset
+v50 <- purrr::map_dfr(list.files("voting50", full.names = T), readRDS)
+```
+
 ## Extra features
 ### `ggswissparl`
 The function `ggswissparl` uses the in-built data frame `seating_plan` (based on the the [schematic representation of the National Council Hall](https://www.parlament.ch/en/organe/national-council/groups-chamber-nc)) to visualize the results of ballots in the National Council. Since only the current seating arrangement can be retrieved from the API, only the most recent voting results can be displayed correctly.
