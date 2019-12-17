@@ -180,6 +180,7 @@ swissparl::get_data(
 #> #   EndTimeWithTimezone <dttm>, VoteBusinessNumber <lgl>,
 #> #   VoteBusinessShortNumber <lgl>, VoteBusinessTitle <lgl>
 ```
+### Periods
 Or it can be used to fetch detailed information on all political businesses submitted during a **given period**:
 ``` r
 swissparl::get_data(
@@ -220,8 +221,8 @@ swissparl::get_data(
 #> #   FirstCouncil2 <int>, FirstCouncil2Name <chr>,
 #> #   FirstCouncil2Abbreviation <chr>, TagNames <chr>
 ```
+### Substrings
 To a certain extent, it is also possible to search for **substring matches in texts**. For example, to search for all political businesses that contain *CO2* in the title, enter the following query: 
-
 ``` r
 swissparl::get_data(table = "Business", Title = c("~CO2"), Language = "DE")
 #> 
