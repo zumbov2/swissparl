@@ -18,8 +18,7 @@ First we have to download the data, which takes quite some time…
 df <- get_data(table = "Transcript", Language = "DE")
 ```
 
-1. Explore the data
--------------------
+## Exploring the Data
 
 To get familiar with the data, we first check who spoke the most since
 1999.
@@ -214,10 +213,7 @@ Seems like keeping track of the speaking time was the *pièce de
 résistance*. What irony! In a country famous for its high end, reliable
 watches…
 
-What’s normal and what values are outside of it?
-
-Filtering outliers based on Interquartile Range.
-------------------------------------------------
+### Filtering outliers based on Interquartile Range
 
 ``` r
 MinSpeed <- quantile(dfs$WordsPerMin, 0.25) - 1.5 * IQR(dfs$WordsPerMin)
@@ -242,6 +238,7 @@ dfs2 %>%
 
 Looks a lot better now…
 
+### Language-Specific Analysis
 Let’s have a look at the distribution of speeches over different
 languages:
 
@@ -284,8 +281,7 @@ As expected, slow german-speaking members, fast speaking representatives
 from the french part - and please note this nice normal distribution for
 german speeches!
 
-2. Speed on Individual Level
-----------------------------
+## Speed on Individual Level
 
 Now, let’s have a look at speeds on the individual level.
 
@@ -342,8 +338,7 @@ bind_rows(
 
 ![](img2/13-1.png)
 
-3. Cantonal Differences
------------------------
+## Cantonal Differences
 
 That’s the fun part, how slow are the bernese actually?
 
