@@ -320,4 +320,4 @@ Here are some application examples:
 - **Example 2**: [Slow Bernese?](https://github.com/zumbov2/swissparl/blob/master/examples/ex2.md) – *A Cantonal Comparison of Speaking Rates* (by [Benjamin Gföhler](https://www.benjamingfoehler.ch/))
 - **Example 3**: [The Federal Council's To-Do List](https://github.com/zumbov2/swissparl/blob/master/examples/ex3.md) – *A Simple Trend Analysis of Procedural Requests*
 - **Example 4**: [What Are They Talking About?](https://github.com/zumbov2/swissparl/blob/master/examples/ex4.md) – *Application of the Lingusitic Concept of Keyness to Speeches*
-- **Example 5**: [Polarization in the National Council](https://github.com/zumbov2/swissparl/blob/master/examples/ex5.md) – *W-NOMINATE Scores for the 50th Legislative Termm
+- **Example 5**: [Polarization in the National Council](https://github.com/zumbov2/swissparl/blob/master/examples/ex5.md) – *W-NOMINATE Scores for the 50th Legislative Term*
