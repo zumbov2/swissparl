@@ -1,0 +1,304 @@
+---
+title: "`swissparl`: Example 2"
+author: Benjamin Gföhler
+date: December 10, 2019
+output:
+  md_document:
+    variant: markdown_github
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, dpi = 500, fig.width = 12, fig.height = 8)
+
+# Load Packages
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(swissparl, dplyr, hrbrthemes, ggplot2, ggridges, tokenizers)
+
+# Load Data
+df <- readRDS("df.rds")
+dfs <- readRDS("dfs.rds")
+```
+
+# Slow Bernese?
+As Switzerland is a federalistic country, Cantons (States) are a rather important feature. Accordingly, there is quite some competition between Cantons in all aspects of life. One very controversial point are languages. There are not just 4 different official languages, but also huge differences within the part that speaks the same language. One prominent common belief is that people from the Canton of Berne (the Capital) are extraordinary slow speakers - especially compared to people from Zurich (yes, I'm from Zurich). To test this common belief, we will use speeches from members of the Swiss Parliament, reaching back to 1999.  
+
+
+First we have to download the data, which takes quite some time...
+
+```{r g1, eval=FALSE}
+df <- get_data(table = "Transcript", Language = "DE")
+```
+
+## 1. Explore the data
+To get familiar with the data, we first check who spoke the most since 1999.
+
+```{r g2}
+library(dplyr)
+
+df %>%
+  group_by(PersonNumber, SpeakerLastName, CouncilName) %>% 
+  count() %>%
+  ungroup() %>% 
+  top_n(20, n) %>% 
+  arrange(desc(n)) %>% 
+  knitr::kable()
+```
+
+This is still raw data and not very helpful for our case. First, lets drop all texts that are not speeches (Type1) and exclude all texts by presidents of the council, as they speak a lot more than the rest and on special occasions, which biases the analysis.
+
+```{r g3, eval=F}
+dfs <- df %>%
+  filter(Type == 1) %>% 
+  filter(!SpeakerLastName == "leer") %>% 
+  filter(!SpeakerFunction %in% c("1VP-F", "1VP-M", "2VP-F", "2VP-M", "AP-M", "P-F", "P-M")) %>% 
+  filter(!Function %in% c("1VP-M", "2VP-M", "P-F", "p-m", "P-m", "P-M", "P-MM"))
+```
+
+Looks a lot better now...
+
+```{r g4}
+dfs %>%
+  group_by(PersonNumber, SpeakerLastName, CouncilName) %>% 
+  count() %>%
+  ungroup() %>% 
+  top_n(20, n) %>% 
+  arrange(desc(n)) %>% 
+  knitr::kable()
+```
+
+The magic is about to happen. After cleaning the text and free it from unnecessary remarks, we calculate the duration of the speech, count the number of words and divide the first by the latter to get [speech rate](https://www.write-out-loud.com/speech-rate.html) words per minute. Lastly, we filter all entries that procude NAs in words per minute. 
+
+```{r g5, eval=F}
+library(tokenizers)
+
+dfs <- dfs %>%
+  mutate(
+    Text2 = swissparl::clean_text(Text, keep_round_brackets = F),
+    SpeechDurationMin = as.numeric(difftime(End, Start, units = "mins")),
+    NumOfWords = count_words(Text2),
+    WordsPerMin = NumOfWords / SpeechDurationMin
+    ) %>%
+  filter(!is.na(WordsPerMin))
+```
+
+Let's check the distribution of *Number of Words* and *Speech Duration* to see whether our calculations worked.
+
+```{r g6}
+# Packages
+library(ggplot2)
+library(hrbrthemes)
+
+# Scatterplot
+dfs %>% 
+  ggplot(aes(NumOfWords, SpeechDurationMin)) +
+  geom_point() +
+  theme_ipsum_rc()
+```
+
+Seems like there are some unrealistic values. Let's have a closer look at the fastest and slowest speaker and their speeches.
+
+```{r g7}
+# Fastest
+dfs %>% 
+  arrange(desc(WordsPerMin)) %>% 
+  select(IdSubject, NumOfWords, SpeechDurationMin, WordsPerMin) %>% 
+  slice(1:20) %>% 
+  knitr::kable()
+```
+
+```{r g8}
+# Slowest
+dfs %>% 
+  arrange(WordsPerMin) %>% 
+  select(IdSubject, NumOfWords, SpeechDurationMin, WordsPerMin) %>% 
+  slice(1:20) %>% 
+  knitr::kable()
+```
+
+Seems like keeping track of the speaking time was the *pièce de résistance*. What irony! In a country famous for its high end, reliable watches...
+
+What's normal and what values are outside of it?
+
+## Filtering outliers based on Interquartile Range.
+
+```{r g9}
+MinSpeed <- quantile(dfs$WordsPerMin, 0.25) - 1.5 * IQR(dfs$WordsPerMin)
+MaxSpeed <- quantile(dfs$WordsPerMin, 0.75) + 1.5 * IQR(dfs$WordsPerMin)
+ 
+dfs2 <- dfs %>% 
+  filter(WordsPerMin > MinSpeed) %>% 
+  filter(WordsPerMin < MaxSpeed)
+```
+
+Re-examination of the distribution:
+
+```{r g10}
+dfs2 %>% 
+  filter(MeetingCouncilAbbreviation == "N") %>% 
+  ggplot(aes(NumOfWords, SpeechDurationMin)) +
+  geom_point() +
+  theme_ipsum_rc()
+```
+
+Looks a lot better now...  
+
+Let's have a look at the distribution of speeches over different languages:
+
+```{r g11}
+# Speechs per Language
+dfs2 %>% 
+  group_by(LanguageOfText) %>% 
+  count() %>% 
+  mutate(Share = n/nrow(dfs2)) %>% 
+  knitr::kable()
+```
+
+The use of italian and french mirrors their respective share of the [Swiss population](https://www.bfs.admin.ch/bfs/de/home/statistiken/bevoelkerung/sprachen-religionen/sprachen.html) almost perfectly!  
+
+Next step: delete NAs and look at the speech rate per language.
+
+```{r g12}
+library(ggridges)
+
+dfs2 %>% 
+  filter(!is.na(LanguageOfText)) %>% 
+  ggplot(aes(x = WordsPerMin, y = LanguageOfText)) +
+  geom_density_ridges(alpha = 0.8) +
+  theme_ipsum_rc()
+
+```
+
+As expected, slow german-speaking members, fast speaking representatives from the french part - and please note this nice normal distribution for german speeches!
+
+## 2. Speed on Individual Level
+Now, let's have a look at speeds on the individual level.  
+
+In a first step, we calculate the average speed per person. To create greater reliability, we exclude individuals with less than 10 speeches in a given language. To find the fastet and slowest speaking individuals we look at their deviation from the mean. 
+
+```{r 13}
+# Speed per councillor
+dfs3 <- dfs2 %>%
+  
+  # Mean per language
+  filter(!is.na(LanguageOfText)) %>% 
+  group_by(LanguageOfText) %>% 
+  mutate(MeanLanguage = mean(WordsPerMin)) %>% 
+  
+  # Minimal number of speeches per language
+  group_by(PersonNumber, SpeakerLastName, CantonAbbreviation, LanguageOfText) %>%
+  mutate(NumberOfSpeeches = n()) %>% 
+  ungroup() %>% 
+  filter(NumberOfSpeeches > 10) %>% 
+  
+  # Deviation from mean
+  group_by(PersonNumber, SpeakerLastName, CantonAbbreviation, LanguageOfText) %>%
+  summarise(
+    MeanWordsPerMin = mean(WordsPerMin),
+    DevFromLanguageMean = MeanWordsPerMin - mean(MeanLanguage)
+    )
+  
+# Fastest vs. slowest
+bind_rows(
+  dfs3 %>% 
+    group_by(LanguageOfText) %>% 
+    top_n(5, MeanWordsPerMin),
+  dfs3 %>% 
+    group_by(LanguageOfText) %>% 
+    top_n(-5, MeanWordsPerMin)
+  ) %>% 
+  mutate(label = paste0(SpeakerLastName, " (", CantonAbbreviation, ")")) %>% 
+  ggplot(aes(reorder(label, DevFromLanguageMean), DevFromLanguageMean)) +
+  geom_col() +
+  coord_flip() +
+  scale_y_continuous(limits = c(-40, 40)) +
+  facet_wrap(.~LanguageOfText, scales = "free_y") +
+  labs(
+    title = "Fastest and Slowest Speakers per Language" ,
+    x = "",
+    y = "Deviation from Average Speed (Words/Min)"
+    ) +
+  theme_ipsum_rc() +
+  theme(panel.grid.minor = element_blank())
+
+```
+
+## 3. Cantonal Differences
+
+That's the fun part, how slow are the bernese actually?
+
+### German
+```{r 14}
+dfs2 %>%
+  filter(LanguageOfText == "DE") %>% 
+  filter(!is.na(CantonAbbreviation)) %>%
+  group_by(CantonAbbreviation) %>% 
+  filter(n() > 20) %>% 
+  mutate(CantonMedian = median(WordsPerMin)) %>% 
+  ungroup() %>% 
+  ggplot(aes(x = WordsPerMin, y = reorder(CantonAbbreviation, CantonMedian))) +
+  stat_density_ridges(
+    quantile_lines = TRUE, 
+    quantiles = 2, 
+    fill = hrbrthemes::ft_cols$peach, 
+    alpha = 0.8
+    ) +
+  labs(
+    title = "Mean Speech Rate of Councillors per Canton (German speeches)" ,
+    x = "Words/Min"
+    ) +
+  theme_ipsum_rc() +
+  theme(axis.title.y = element_blank())
+```
+
+Bummer! The Bernese representative are about average and even faster speaking than their colleagues from Zurich. However, in parliament all representatives speak in standard german and not in their respective dialects, which probably distorts the values somewhat in favour of the bernese.
+
+### French
+```{r 15}
+dfs2 %>%
+  filter(LanguageOfText == "FR") %>% 
+  filter(!is.na(CantonAbbreviation)) %>%
+  group_by(CantonAbbreviation) %>%
+  filter(n() > 20) %>% 
+  mutate(CantonMedian = median(WordsPerMin)) %>% 
+  ungroup() %>% 
+  ggplot(aes(x = WordsPerMin, y = reorder(CantonAbbreviation, CantonMedian))) +
+  stat_density_ridges(
+    quantile_lines = TRUE, 
+    quantiles = 2, 
+    fill = "dodgerblue3", 
+    alpha = 0.8
+    ) +
+  labs(
+    title = "Mean Speech Rate of Councillors per Canton (French speeches)" ,
+    x = "Words/Min"
+    ) +
+  theme_ipsum_rc() +
+  theme(axis.title.y = element_blank())
+```
+Too bad, even in french the bernese councillors are faster than their counterparts from Zurich.
+
+### Italian
+```{r 16}
+dfs2 %>%
+  filter(LanguageOfText == "IT") %>% 
+  filter(!is.na(CantonAbbreviation)) %>%
+  group_by(CantonAbbreviation) %>%
+  filter(n() > 20) %>% 
+  mutate(CantonMedian = median(WordsPerMin)) %>% 
+  ungroup() %>% 
+  ggplot(aes(x = WordsPerMin, y = reorder(CantonAbbreviation, CantonMedian))) +
+  stat_density_ridges(
+    quantile_lines = TRUE, 
+    quantiles = 2, 
+    fill = "green", 
+    alpha = 0.8
+    ) +
+  labs(
+    title = "Mean Speech Rate of Councillors per Canton (Italian speeches)" ,
+    x = "Words/Min"
+    ) +
+  theme_ipsum_rc() +
+  theme(axis.title.y = element_blank())
+```
+
+And finally, they are also using Italian and Zurich's representatives not - show-offs! ;)
