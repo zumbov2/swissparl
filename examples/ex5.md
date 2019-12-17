@@ -73,7 +73,7 @@ Data Preparation
 
 Before we can analyze our data with the NOMINATE scaling method, we have
 to convert it into an object of the class `rollcall`. For this we use
-the package `pscl`…this may takes a little getting used to.
+the package `pscl`…this may take a little getting used to.
 
 ``` r
 # Load Packages
