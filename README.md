@@ -29,6 +29,7 @@ The new [Webservices](https://ws.parlament.ch/odata.svc/) are comprehensive and 
 Retrieves the names of all available tables or datasets (currently 43).
 ``` r
 swissparl::get_tables()
+#> 
 #>  [1] "Bill"                   "BillLink"              
 #>  [3] "BillStatus"             "Business"              
 #>  [5] "BusinessResponsibility" "BusinessRole"          
@@ -56,6 +57,7 @@ swissparl::get_tables()
 Retrieves the names of all the variables of a given table.
 ``` r
 swissparl::get_variables("Transcript")
+#> 
 #>  [1] "CantonAbbreviation"         "CantonId"                  
 #>  [3] "CantonName"                 "CouncilId"                 
 #>  [5] "CouncilName"                "DisplaySpeaker"            
@@ -78,6 +80,7 @@ swissparl::get_variables("Transcript")
 Wraps around `get_tables` and `get_variables` and retrieves all available tables and variables. 
 ``` r
 swissparl::get_overview(silent = T)
+#> 
 #> # A tibble: 685 x 2
 #>    table variable                
 #>    <chr> <chr>                   
@@ -97,6 +100,7 @@ swissparl::get_overview(silent = T)
 Downloads the first rows of a given table and gives a first insight into the data structure.
 ``` r
 swissparl::get_glimpse("Person", rows = 100)
+#> 
 #> # A tibble: 100 x 21
 #>       ID Language PersonNumber PersonIdCode Title TitleText LastName
 #>    <int> <chr>           <int>        <int> <int> <chr>     <chr>   
@@ -121,6 +125,7 @@ swissparl::get_glimpse("Person", rows = 100)
 The main function of the package is `get_data`. It can be used to download entire datasets or selected rows from any available table.
 ``` r
 swissparl::get_data("Person", Language = "DE")
+#> 
 #> # A tibble: 3,629 x 21
 #>       ID Language PersonNumber PersonIdCode Title TitleText LastName
 #>    <int> <chr>           <int>        <int> <int> <chr>     <chr>   
@@ -144,8 +149,12 @@ swissparl::get_data("Person", Language = "DE")
 ### Subsetting with ...
 The function uses ... (ellipsis) to subset tables and can therefore be applied very flexibly. For example, it can be used to download all speech transcripts of a given councillor: 
 ``` r
-swissparl::get_data(table = "Transcript", SpeakerLastName = "Blocher", 
-    Language = "DE")
+swissparl::get_data(
+    table = "Transcript", 
+    SpeakerLastName = "Blocher", 
+    Language = "DE"
+    )
+#> 
 #> # A tibble: 1,380 x 34
 #>    ID    Language IdSubject VoteId PersonNumber  Type Text 
 #>    <chr> <chr>    <chr>     <lgl>         <int> <int> <chr>
@@ -171,10 +180,14 @@ swissparl::get_data(table = "Transcript", SpeakerLastName = "Blocher",
 #> #   EndTimeWithTimezone <dttm>, VoteBusinessNumber <lgl>,
 #> #   VoteBusinessShortNumber <lgl>, VoteBusinessTitle <lgl>
 ```
-Or it can be used to fetch detailed information on all political businesses submitted during a given period:
+Or it can be used to fetch detailed information on all political businesses submitted during a **given period**:
 ``` r
-swissparl::get_data(table = "Business", SubmissionDate = c(">2019-06-30", 
-    "<2019-12-08"), Language = "DE")
+swissparl::get_data(
+    table = "Business", 
+    SubmissionDate = c(">2019-06-30", "<2019-12-08"), 
+    Language = "DE"
+    )
+#> 
 #> # A tibble: 815 x 43
 #>        ID Language BusinessShortNu~ BusinessType BusinessTypeName
 #>     <int> <chr>    <chr>                   <int> <chr>           
@@ -189,6 +202,43 @@ swissparl::get_data(table = "Business", SubmissionDate = c(">2019-06-30",
 #>  9 2.02e7 DE       19.050                      1 Geschäft des Bu~
 #> 10 2.02e7 DE       19.051                      1 Geschäft des Bu~
 #> # ... with 805 more rows, and 38 more variables:
+#> #   BusinessTypeAbbreviation <chr>, Title <chr>, Description <chr>,
+#> #   InitialSituation <chr>, Proceedings <chr>, DraftText <lgl>,
+#> #   SubmittedText <chr>, ReasonText <chr>, DocumentationText <lgl>,
+#> #   MotionText <lgl>, FederalCouncilResponseText <chr>,
+#> #   FederalCouncilProposal <int>, FederalCouncilProposalText <chr>,
+#> #   FederalCouncilProposalDate <date>, SubmittedBy <chr>,
+#> #   BusinessStatus <int>, BusinessStatusText <chr>,
+#> #   BusinessStatusDate <date>, ResponsibleDepartment <int>,
+#> #   ResponsibleDepartmentName <chr>,
+#> #   ResponsibleDepartmentAbbreviation <chr>, IsLeadingDepartment <lgl>,
+#> #   Tags <chr>, Category <chr>, Modified <dttm>, SubmissionDate <date>,
+#> #   SubmissionCouncil <int>, SubmissionCouncilName <chr>,
+#> #   SubmissionCouncilAbbreviation <chr>, SubmissionSession <int>,
+#> #   SubmissionLegislativePeriod <int>, FirstCouncil1 <int>,
+#> #   FirstCouncil1Name <chr>, FirstCouncil1Abbreviation <chr>,
+#> #   FirstCouncil2 <int>, FirstCouncil2Name <chr>,
+#> #   FirstCouncil2Abbreviation <chr>, TagNames <chr>
+```
+To a certain extent, it is also possible to search for **substring matches in texts**. For example, to search for all political businesses that contain *CO2* in the title, enter the following query: 
+
+``` r
+swissparl::get_data(table = "Business", Title = c("~CO2"), Language = "DE")
+#> 
+#> # A tibble: 207 x 43
+#>        ID Language BusinessShortNu~ BusinessType BusinessTypeName
+#>     <int> <chr>    <chr>                   <int> <chr>           
+#>  1 1.99e7 DE       92.3245                     5 Motion          
+#>  2 2.00e7 DE       95.2011                    10 Petition        
+#>  3 2.00e7 DE       95.3546                     5 Motion          
+#>  4 2.00e7 DE       97.030                      1 Geschäft des Bu~
+#>  5 2.00e7 DE       00.5227                    14 Fragestunde. Fr~
+#>  6 2.00e7 DE       01.420                      4 Parlamentarisch~
+#>  7 2.00e7 DE       01.421                      4 Parlamentarisch~
+#>  8 2.00e7 DE       01.422                      4 Parlamentarisch~
+#>  9 2.00e7 DE       01.3178                     5 Motion          
+#> 10 2.00e7 DE       01.3225                     8 Interpellation  
+#> # ... with 197 more rows, and 38 more variables:
 #> #   BusinessTypeAbbreviation <chr>, Title <chr>, Description <chr>,
 #> #   InitialSituation <chr>, Proceedings <chr>, DraftText <lgl>,
 #> #   SubmittedText <chr>, ReasonText <chr>, DocumentationText <lgl>,
