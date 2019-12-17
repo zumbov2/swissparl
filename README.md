@@ -5,7 +5,6 @@
 <img src="logo.png" height="140px" align="right" style="padding-left:10px;background-color:white;"/>
 
 # swissparl 
-## The Swiss Parliament Webservices R API
 This R package prototype is an interface to the new, still unofficial and accordingly still undocumented [Webservices](https://ws.parlament.ch/odata.svc/) of [The Federal Assembly — The Swiss Parliament](https://www.parlament.ch/en) that offer an open, machine-readable interface to the most important data on parliamentary activities. The previous version of the package (interface to the old Webservices) can be found [here](https://github.com/zumbov2/swissparl/tree/master/old_ws).
 
 ## Installation
