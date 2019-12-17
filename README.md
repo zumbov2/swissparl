@@ -2,7 +2,7 @@
 ![Lifecycle](https://img.shields.io/badge/lifecycle-maturing-orange.svg)
 [![Build Status](https://travis-ci.org/zumbov2/swissparl.svg?branch=master)](https://travis-ci.org/zumbov2/swissparl)
 [![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-<img src="logo.png" height="140px" align="right" style="padding-left:10px;background-color:white;"/>
+<img src="logo.png" height="180px" align="right" style="padding-left:10px;background-color:white;"/>
 
 # swissparl 
 This R package prototype is an interface to the new, still unofficial and accordingly still undocumented [Webservices](https://ws.parlament.ch/odata.svc/) of [The Federal Assembly — The Swiss Parliament](https://www.parlament.ch/en) that offer an open, machine-readable interface to the most important data on parliamentary activities. The previous version of the package (interface to the old Webservices) can be found [here](https://github.com/zumbov2/swissparl/tree/master/old_ws).
