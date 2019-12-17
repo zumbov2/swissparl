@@ -224,7 +224,7 @@ swissparl::get_data(
 ### Substrings
 To a certain extent, it is also possible to search for **substring matches in texts**. For example, to search for all political businesses that contain *CO2* in the title, enter the following query: 
 ``` r
-swissparl::get_data(table = "Business", Title = c("~CO2"), Language = "DE")
+swissparl::get_data(table = "Business", Title = "~CO2", Language = "DE")
 #> 
 #> # A tibble: 207 x 43
 #>        ID Language BusinessShortNu~ BusinessType BusinessTypeName
