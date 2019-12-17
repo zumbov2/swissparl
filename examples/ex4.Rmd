@@ -150,4 +150,4 @@ keywords2 %>%
   theme_ipsum_rc()
 ```
 
-For further analysis, it is advisable to consider the field and the methods of [topic models](https://en.wikipedia.org/wiki/Topic_model).
+Further analyses could now be performed using other NLP techniques, such as [Topic Modeling](https://cran.r-project.org/web/packages/tidytext/vignettes/topic_modeling.html).
