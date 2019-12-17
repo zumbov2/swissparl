@@ -317,7 +317,7 @@ swissparl::get_data("Transcript", Language = "DE", ID = 112146) %>%
 # Examples
 Here are some application examples:  
 - Example 1: [Who with Whom in the Council of States?](https://github.com/zumbov2/swissparl/blob/master/examples/ex1.md) – A Brief Network Analysis
-- Example 2: Speech Rate 
+- Example 2: Speech Rate (work in progress)
 - Example 3: [The Federal Council's To-Do List](https://github.com/zumbov2/swissparl/blob/master/examples/ex3.md)
 - Example 4: [What Are They Talking About?](https://github.com/zumbov2/swissparl/blob/master/examples/ex4.md)
-- Example 5: NOMINATE and Friends
+- Example 5: Polarization in the National Council (work in progress)
