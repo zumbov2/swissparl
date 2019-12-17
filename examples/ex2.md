@@ -1,5 +1,6 @@
 Slow Bernese?
 =============
+*Benjamin Gföhler (December 17, 2019)*  
 
 As Switzerland is a federalistic country, Cantons (States) are a rather
 important feature. Accordingly, there is quite some competition between
@@ -8,7 +9,7 @@ languages. There are not just 4 different official languages, but also
 huge differences within the part that speaks the same language. One
 prominent common belief is that people from the Canton of Berne (the
 Capital) are extraordinary slow speakers - especially compared to people
-from Zurich (yes, I’m from Zurich). To test this common belief, we will
+from Zurich (*yes, I’m from Zurich*). To test this common belief, we will
 use speeches from members of the Swiss Parliament, reaching back to
 1999.
 
