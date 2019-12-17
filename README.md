@@ -2,11 +2,10 @@
 ![Lifecycle](https://img.shields.io/badge/lifecycle-maturing-orange.svg)
 [![Build Status](https://travis-ci.org/zumbov2/swissparl.svg?branch=master)](https://travis-ci.org/zumbov2/swissparl)
 [![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-<img src="logo.png" height="140px" align="right" style="padding-left:10px;background-color:white;"/>
+<img src="logo.png" height="120px" align="right" style="padding-left:10px;background-color:white;"/>
 
 # swissparl 
-## The Swiss Parliament Webservices R API
-This R package prototype is an interface to the new, still unofficial and accordingly still undocumented [Webservices](https://ws.parlament.ch/odata.svc/) of [The Federal Assembly — The Swiss Parliament](https://www.parlament.ch/en) that offer an open, machine-readable interface to the most important data on parliamentary activities. The previous version of the package (interface to the old Webservices) can be found [here](https://github.com/zumbov2/swissparl/tree/master/old_ws).
+This R package is an interface to the new, still unofficial and accordingly still undocumented [Webservices](https://ws.parlament.ch/odata.svc/) of [The Federal Assembly — The Swiss Parliament](https://www.parlament.ch/en) that offer an open, machine-readable interface to the most important data on parliamentary activities. The previous version of the package (interface to the old Webservices) can be found [here](https://github.com/zumbov2/swissparl/tree/master/old_ws).
 
 ## Installation
 Version 0.2.0 is on CRAN and can be installed as follows:
@@ -318,7 +317,7 @@ swissparl::get_data("Transcript", Language = "DE", ID = 112146) %>%
 # Examples
 Here are some application examples:  
 - Example 1: [Who with Whom in the Council of States?](https://github.com/zumbov2/swissparl/blob/master/examples/ex1.md) – A Brief Network Analysis
-- Example 2: Speech Rate 
+- Example 2: Speech Rate (work in progress)
 - Example 3: [The Federal Council's To-Do List](https://github.com/zumbov2/swissparl/blob/master/examples/ex3.md)
 - Example 4: [What Are They Talking About?](https://github.com/zumbov2/swissparl/blob/master/examples/ex4.md)
-- Example 5: NOMINATE and Friends
+- Example 5: Polarization in the National Council (work in progress)
