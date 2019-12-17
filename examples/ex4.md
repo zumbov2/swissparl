@@ -9,7 +9,7 @@ statistical significance of the frequency of a word in a given corpus,
 related to a reference corpus. Let’s take a look at this for the past
 years.  
 
-We’re downloading all the transcripts of the speeches (`Type = 1`
+We’re downloading all transcripts (`Type = 1`
 prevents the download of notes on votes and other processes). For the
 sake of simplicity, we will only consider speeches in German during the
 analysis. The download still may take a few hours.
