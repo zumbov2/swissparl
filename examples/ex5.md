@@ -4,7 +4,7 @@ Polarization in the National Council
 In political science, various dimensionality reduction methods are used
 to derive polarization patterns from voting data. The best known scaling
 method is probably
-\[(D)W-NOMINATE\](<a href="https://en.wikipedia.org/wiki/NOMINATE_(scaling_method)" class="uri">https://en.wikipedia.org/wiki/NOMINATE_(scaling_method)</a>,
+[(D)W-NOMINATE](https://en.wikipedia.org/wiki/NOMINATE_(scaling_method)),
 whose predecessor NOMINATE (*Nominal Three-Step Estimation*) was
 developed in the 1980s. *We want to use this procedure to examine how
 polarised the National Council was in the 50th legislative period.*
@@ -107,8 +107,8 @@ rc50 <- rollcall(
 )
 ```
 
-Poole and Rosenthal W-NOMINATE
-------------------------------
+Poole and Rosenthal's W-NOMINATE
+--------------------------------
 
 To calculate the relative positions of the politicians on 2 dimensions
 we use W-NOMINATE from Poole and Rosenthal. The algorithm is implented
@@ -205,9 +205,6 @@ res$legislators %>%
     panel.grid.minor = element_blank()
     )
 ```
-
-    ## Warning: Removed 12 rows containing non-finite values
-    ## (stat_density_ridges).
 
 ![](img5/g7-1.png)
 
