@@ -2,6 +2,7 @@
 ![Lifecycle](https://img.shields.io/badge/lifecycle-maturing-orange.svg)
 [![Build Status](https://travis-ci.org/zumbov2/swissparl.svg?branch=master)](https://travis-ci.org/zumbov2/swissparl)
 [![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![cranlogs](https://cranlogs.r-pkg.org/badges/grand-total/swissparl)](http://cran.rstudio.com/web/packages/swissparl/index.html)
 <img src="logo.png" height="120px" align="right" style="padding-left:10px;background-color:white;"/>
 
 # swissparl 
