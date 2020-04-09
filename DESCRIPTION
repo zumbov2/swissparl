@@ -1,7 +1,7 @@
 Package: swissparl
 Type: Package
 Title: Interface to the Webservices of the Swiss Parliament
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: 
     c(person("David", "Zumbach", , "david.zumbach@gfzb.ch", c("aut", "cre")),
     person("Benjamin", "Gföhler", role = "ctb"))
@@ -16,7 +16,7 @@ RoxygenNote: 7.0.2
 Imports: dplyr, jsonlite, magrittr, purrr, stringr, tibble, tidyr,
         lubridate, crayon, httr, ggplot2
 NeedsCompilation: no
-Packaged: 2019-12-15 16:34:52 UTC; david
+Packaged: 2020-04-09 20:57:12 UTC; david
 Author: David Zumbach [aut, cre],
   Benjamin Gföhler [ctb]
 Maintainer: David Zumbach <david.zumbach@gfzb.ch>

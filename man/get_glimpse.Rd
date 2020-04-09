@@ -21,7 +21,7 @@ A tibble of different length and variable composition.
     allows a first insight into the data structure.
 }
 \examples{
-\donttest{
+\dontrun{
 # Short excerpt of table "Person"
 get_glimpse(table = "Person")
 }

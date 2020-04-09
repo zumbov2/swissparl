@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Get all available tables
 #' get_tables()
 #' }

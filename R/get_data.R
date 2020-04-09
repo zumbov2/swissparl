@@ -36,7 +36,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Retrieve data on the members of the Swiss Parliament
 #' get_data(table = "Person", Language = "DE")
 #'

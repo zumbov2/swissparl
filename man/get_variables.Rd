@@ -20,7 +20,7 @@ A character vector that contains the names of the variables.
 \code{get_variables} retrieves the variable names of a table of the Swiss Parliament WebServices.
 }
 \examples{
-\donttest{
+\dontrun{
 # Get variables of table "Person"
 get_variables(table = "Person")
 }

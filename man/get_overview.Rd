@@ -17,7 +17,7 @@ A tibble with the 2 columns \code{table} and \code{variable}.
     the variables they contain.
 }
 \examples{
-\donttest{
+\dontrun{
 get_overview()
 }
 }

@@ -33,7 +33,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Visualization of a vote of the 51st legislature
 #' get_data("Voting", Language = "DE", IdVote = 23458) %>%
 #'     ggswissparl()

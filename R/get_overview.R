@@ -17,7 +17,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' get_overview()
 #' }
 get_overview <- function(silent = F) {

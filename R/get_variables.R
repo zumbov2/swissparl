@@ -17,7 +17,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Get variables of table "Person"
 #' get_variables(table = "Person")
 #' }
@@ -28,7 +28,7 @@ get_variables <- function(table, pb.pos = NULL, pb = NULL) {
     "https://ws.parlament.ch/odata.svc/",
     table,
     "?$top=1"
-  )
+    )
 
   # Fetch Data
   variables <- jsonlite::fromJSON(url) %>%

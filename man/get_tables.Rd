@@ -13,7 +13,7 @@ A character vector that contains all the names of the available tables.
 \code{get_tables} retrieves the names of the available tables of the Swiss Parliament WebServices.
 }
 \examples{
-\donttest{
+\dontrun{
 # Get all available tables
 get_tables()
 }

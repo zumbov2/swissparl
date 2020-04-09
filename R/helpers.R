@@ -38,7 +38,7 @@ clean_text_wh <- function(text, keep_round_brackets) {
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Get clean version of transcripts
 #' get_glimpse(table = "Transcript", rows = 1000, Language = "DE") %>%
 #'    mutate(Text2 = clean_text(Text))

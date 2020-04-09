@@ -53,7 +53,7 @@ A tibble of different length and variable composition.
 \code{get_data} retrieves data from the WebServices of the Swiss Parliament.
 }
 \examples{
-\donttest{
+\dontrun{
 # Retrieve data on the members of the Swiss Parliament
 get_data(table = "Person", Language = "DE")
 

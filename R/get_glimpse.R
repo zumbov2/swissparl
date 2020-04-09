@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Short excerpt of table "Person"
 #' get_glimpse(table = "Person")
 #' }

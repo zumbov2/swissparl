@@ -18,7 +18,7 @@ A character vector of same length as \code{text}.
 \code{clean_text} removes HTML code, brackets and their contents as well as line breaks from texts.
 }
 \examples{
-\donttest{
+\dontrun{
 # Get clean version of transcripts
 get_glimpse(table = "Transcript", rows = 1000, Language = "DE") \%>\%
    mutate(Text2 = clean_text(Text))
