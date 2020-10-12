@@ -335,7 +335,7 @@ swissparl::get_data(
   )
 ```
 ## Examples
-Here are some application examples:  
+Here are some examples of use:
 - **Example 1**: [Who with Whom in the Council of States?](https://github.com/zumbov2/swissparl/blob/master/examples/ex1.md) – *A Brief Network Analysis*
 - **Example 2**: [Slow Bernese?](https://github.com/zumbov2/swissparl/blob/master/examples/ex2.md) – *A Cantonal Comparison of Speaking Rates* (by [Benjamin Gföhler](https://www.benjamingfoehler.ch/))
 - **Example 3**: [The Federal Council's To-Do List](https://github.com/zumbov2/swissparl/blob/master/examples/ex3.md) – *A Simple Trend Analysis of Procedural Requests*
