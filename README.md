@@ -181,8 +181,25 @@ swissparl::get_data(
 #> #   EndTimeWithTimezone <dttm>, VoteBusinessNumber <lgl>,
 #> #   VoteBusinessShortNumber <lgl>, VoteBusinessTitle <lgl>
 ```
+In this way, it is also possible to download all speech transcripts for a specific business. However, this requires a small detour. The first step is to extract when the business was discussed in the councils. This information is stored in the *SubjectBusiness* table.
+``` r
+subject <- swissparl::get_data(
+  table = "SubjectBusiness",
+  BusinessShortNumber = "05.057",
+  Language = "DE"
+  )
+```
+Afterwards all speeches of a specific business can be queried via the IdSubject.
+``` r
+swissparl::get_data(
+  table = "Transcript", 
+  IdSubject = as.numeric(subject$IdSubject),
+  Language = "DE"
+  )
+```
+
 ### Periods
-Or it can be used to fetch detailed information on all political businesses submitted during a **given period**:
+... can also be used to fetch detailed information on all political businesses submitted during a **given period**:
 ``` r
 swissparl::get_data(
     table = "Business", 
