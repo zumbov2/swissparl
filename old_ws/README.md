@@ -10,7 +10,7 @@ most important data on parliamentary activities.
 ## Installation
 ```r
 install.packages("devtools")
-devtools::install_github("zumbov2/swissparl")
+devtools::install_github("zumbov2/swissparl/old_ws/package")
 ```
 
 ## Example
