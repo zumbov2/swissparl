@@ -342,5 +342,8 @@ Here are some examples of use:
 - **Example 4**: [What Are They Talking About?](https://github.com/zumbov2/swissparl/blob/master/examples/ex4.md) – *Application of the Lingusitic Concept of Keyness to Speeches*
 - **Example 5**: [Polarization in the National Council](https://github.com/zumbov2/swissparl/blob/master/examples/ex5.md) – *W-NOMINATE Scores for the 50th Legislative Term*
 
+## Use Cases
+- **NZZ, 16.4.2021**: [Die Grünen machten im Parlament am meisten mit Corona Politik](https://www.nzz.ch/visuals/ld.1606433) | [Code](https://github.com/nzzdev/st-methods/tree/master/2107-parlamentsdebatte-corona)
+
 ## Suggested Citation
 Zumbach, David (2020). swissparl: Interface to the Webservices of the Swiss Parliament. R package version 0.2.1. https://CRAN.R-project.org/package=swissparl
