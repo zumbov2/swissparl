@@ -345,5 +345,8 @@ Here are some examples of use:
 ## Use Cases
 - **NZZ, 16.4.2021**: [Die Grünen machten im Parlament am meisten mit Corona Politik](https://www.nzz.ch/visuals/ld.1606433) | [Code](https://github.com/nzzdev/st-methods/tree/master/2107-parlamentsdebatte-corona)
 
+## swissparl for Python
+[swissparlpy](https://github.com/metaodi/swissparlpy) by [Stefan Oderbolz](https://github.com/metaodi)
+
 ## Suggested Citation
 Zumbach, David (2020). swissparl: Interface to the Webservices of the Swiss Parliament. R package version 0.2.1. https://CRAN.R-project.org/package=swissparl
