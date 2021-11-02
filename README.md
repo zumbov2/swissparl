@@ -15,7 +15,7 @@ Version 0.2.1 is on CRAN and can be installed as follows:
 install.packages("swissparl")
 ```
 
-The latest version is available on GitHub (0.2.1):
+The latest version is available on GitHub (0.2.2):
 
 ```r
 install.packages("devtools")
