@@ -1,7 +1,7 @@
 Package: swissparl
 Type: Package
 Title: Interface to the Webservices of the Swiss Parliament
-Version: 0.2.1
+Version: 0.2.2
 Authors@R: 
     c(person("David", "Zumbach", , "david.zumbach@gfzb.ch", c("aut", "cre")),
     person("Benjamin", "Gföhler", role = "ctb"))
@@ -12,11 +12,11 @@ BugReports: https://github.com/zumbov2/swissparl/issues
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.2
 Imports: dplyr, jsonlite, magrittr, purrr, stringr, tibble, tidyr,
-        lubridate, crayon, httr, ggplot2
+        crayon, httr, ggplot2
 NeedsCompilation: no
-Packaged: 2020-04-09 20:57:12 UTC; david
+Packaged: 2021-11-01 07:39:16 UTC; david
 Author: David Zumbach [aut, cre],
   Benjamin Gföhler [ctb]
 Maintainer: David Zumbach <david.zumbach@gfzb.ch>
