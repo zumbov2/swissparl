@@ -372,6 +372,7 @@ cs50_2 %>%
     )
 ```
 
+## Final illustration
 ![](img1/g18-1.png)
 
 As was to be expected, cooperation took place primarily within
