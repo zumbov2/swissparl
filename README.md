@@ -334,6 +334,14 @@ swissparl::get_data(
   Language = "DE"
   )
 ```
+### All votes of a specific legislative period
+In a first step, we fetch all sessions of the legislative period of interest. Then we use the session IDs to obtain the associated voting decisions of the individual MPs.
+``` r
+sessions <- get_data("Session", Language = "DE")
+sessions51 <- sessions %>% filter(LegislativePeriodNumber == 51)
+votes51 <- get_data("Vote", Language = "DE", IdSession = sessions51$ID)
+```
+
 ## Examples
 Here are some examples of use:
 - **Example 1**: [Who with Whom in the Council of States?](https://github.com/zumbov2/swissparl/blob/master/examples/ex1.md) – *A Brief Network Analysis*
