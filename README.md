@@ -198,6 +198,7 @@ swissparl::get_glimpse("Person", rows = 20)
 ``` r
 swissparl::get_glimpse2("persons", rows = 20)
 #> # A tibble: 20 × 62
+#>
 #>       id url_api      body_key external_id external_alternative…¹ title fullname
 #>    <int> <chr>        <chr>    <chr>       <lgl>                  <lgl> <chr>   
 #>  1 24862 https://api… 1024     10000003    NA                     NA    Andreas…
@@ -231,7 +232,7 @@ swissparl::get_glimpse2("persons", rows = 20)
 
 ## Main functions `get_data`
 
-The main data retrieval functions of the package are `get_data` and `get_data2`.  
+The main data retrieval functions of the package are `get_data` and `get_data2`. 
 They can be used to download entire datasets or selected rows from any available
 OData table (`get_data`) or OpenParlData resource (`get_data2`).
 
@@ -283,67 +284,53 @@ the respective interface, allowing flexible subsetting of tables or resources.
 For example, the function can be used to download all speech transcripts of a given councillor (Odata):
 
 ``` r
+display <- c("MeetingDate", "SpeakerFullName", "CouncilName", "Text")
 swissparl::get_data(
-    table = "Transcript", 
-    SpeakerLastName = "Blocher", 
-    Language = "DE"
-    )
-#> 
-#> # A tibble: 1,380 x 34
-#>    ID    Language IdSubject VoteId PersonNumber  Type Text 
-#>    <chr> <chr>    <chr>     <lgl>         <int> <int> <chr>
-#>  1 63    DE       8         NA               21     1 "<pd~
-#>  2 617   DE       113       NA               21     1 "<pd~
-#>  3 619   DE       113       NA               21     1 "<pd~
-#>  4 639   DE       113       NA               21     1 "<pd~
-#>  5 1506  DE       264       NA               21     1 "<pd~
-#>  6 1519  DE       264       NA               21     1 "<pd~
-#>  7 2517  DE       376       NA               21     1 "<pd~
-#>  8 2565  DE       385       NA               21     1 "<pd~
-#>  9 2567  DE       385       NA               21     1 "<pd~
-#> 10 4254  DE       721       NA               21     1 "<pd~
-#> # ... with 1,370 more rows, and 27 more variables:
-#> #   MeetingCouncilAbbreviation <chr>, MeetingDate <chr>,
-#> #   MeetingVerbalixOid <int>, IdSession <chr>, SpeakerFirstName <chr>,
-#> #   SpeakerLastName <chr>, SpeakerFullName <chr>, SpeakerFunction <chr>,
-#> #   CouncilId <int>, CouncilName <chr>, CantonId <int>, CantonName <chr>,
-#> #   CantonAbbreviation <chr>, ParlGroupName <chr>,
-#> #   ParlGroupAbbreviation <chr>, SortOrder <int>, Start <dttm>,
-#> #   End <dttm>, Function <chr>, DisplaySpeaker <lgl>,
-#> #   LanguageOfText <chr>, Modified <dttm>, StartTimeWithTimezone <dttm>,
-#> #   EndTimeWithTimezone <dttm>, VoteBusinessNumber <lgl>,
-#> #   VoteBusinessShortNumber <lgl>, VoteBusinessTitle <lgl>
+  table = "Transcript", 
+  SpeakerLastName = "Blocher", 
+  Language = "DE"
+  )[display]
+#>
+#> # A tibble: 1,380 × 4
+#>    MeetingDate SpeakerFullName   CouncilName Text                               
+#>    <chr>       <chr>             <chr>       <chr>                              
+#>  1 19991207    Blocher Christoph Nationalrat "<pd_text><p>In der Botschaft von …
+#>  2 19991220    Blocher Christoph Nationalrat "<pd_text><p>Das weiss ich nicht, …
+#>  3 19991220    Blocher Christoph Nationalrat "<pd_text><p>Ich möchte zuerst mei…
+#>  4 19991220    Blocher Christoph Nationalrat "<pd_text><p>Ich bin da von Versch…
+#>  5 19991215    Blocher Christoph Nationalrat "<pd_text><p>Ich bin von der Schwe…
+#>  6 19991215    Blocher Christoph Nationalrat "<pd_text><p>Es ist hier gesagt wo…
+#>  7 20000316    Blocher Christoph Nationalrat "<pd_text><p>Die SVP-Fraktion ist …
+#>  8 20000316    Blocher Christoph Nationalrat "<pd_text><p>Ich beantworte Ihnen …
+#>  9 20000316    Blocher Christoph Nationalrat "<pd_text><p>Wenn das Finanzleitbi…
+#> 10 20000606    Blocher Christoph Nationalrat "<pd_text><p>Ich spreche für die M…
+#> # ℹ 1,370 more rows
 ```
 
 Or all affairs of type "Motion" for a given canton (OpenParlData):
 
 ``` r
+display <- c("body_key", "number", "title_de", "begin_date")
 swissparl::get_data2(
   table = "affairs", 
   body_key = "AG",
   type_harmonized_de = "Motion"
-  )
-#>
-#> # A tibble: 698 × 48
-#>        id url_api     body_key external_id external_alternative…¹ number body_id
-#>     <int> <chr>       <chr>    <chr>       <lgl>                  <chr>    <int>
-#>  1 289559 https://ap… AG       6792558     NA                     26.26      250
-#>  2 289557 https://ap… AG       6792540     NA                     26.25      250
-#>  3 287030 https://ap… AG       6772058     NA                     25.375     250
-#>  4 287031 https://ap… AG       6772063     NA                     25.374     250
-#>  5 287037 https://ap… AG       6772335     NA                     25.381     250
-#>  6 287036 https://ap… AG       6772294     NA                     25.380     250
-#>  7 287035 https://ap… AG       6772243     NA                     25.379     250
-#>  8 287040 https://ap… AG       6772662     NA                     25.384     250
-#>  9 285328 https://ap… AG       6748185     NA                     25.358     250
-#> 10 284925 https://ap… AG       6734978     NA                     25.340     250
+  )[display]
+#> 
+#> # A tibble: 698 × 4
+#>    body_key number title_de                                           begin_date
+#>    <chr>    <chr>  <chr>                                              <chr>     
+#>  1 AG       26.26  Umsetzung einer Solaroffensive des Kantons Aargau  2026-01-1…
+#>  2 AG       26.25  Senkung der Steuerbelastung für Unternehmen, welc… 2026-01-1…
+#>  3 AG       25.375 Sicherstellung der Aufsicht bei Auslagerung von U… 2025-12-1…
+#>  4 AG       25.374 Abtretung von Krankenkassenverlustscheinen an die… 2025-12-1…
+#>  5 AG       25.381 Stärkung des Swisslos-Sportfonds                   2025-12-1…
+#>  6 AG       25.380 Vollzug der Ausschaffung krimineller Ausländerinn… 2025-12-1…
+#>  7 AG       25.379 Selbstdispensation in der Grundversorgung zur Sic… 2025-12-1…
+#>  8 AG       25.384 Kantonalisierung von Planung und Finanzierung der… 2025-12-1…
+#>  9 AG       25.358 Eigentumsschutz stärken – 30-Jahres-Verjährung im… 2025-11-2…
+#> 10 AG       25.340 Ausschliessen von Kunst am Bau im Tätigkeitsberei… 2025-11-1…
 #> # ℹ 688 more rows
-#> # ℹ abbreviated name: ¹​external_alternative_id
-#> # ℹ 41 more variables: title_de <chr>, title_fr <lgl>, title_it <lgl>,
-#> #   title_rm <lgl>, title_long_de <chr>, title_long_fr <lgl>,
-#> #   title_long_it <lgl>, title_long_rm <lgl>, type_name_de <chr>,
-#> #   type_name_fr <lgl>, type_name_it <lgl>, type_name_rm <lgl>,
-#> #   type_external_id <lgl>, type_harmonized_de <chr>, …
 ```
 
 ### Periods
@@ -517,8 +504,13 @@ v50 <- purrr::map_dfr(list.files("voting50", full.names = T), readRDS)
 ```
 
 ## Extra features
-### `ggswissparl`
-The function `ggswissparl` uses the in-built data frame `seating_plan` (based on the the [schematic representation of the National Council Hall](https://www.parlament.ch/en/organe/national-council/groups-chamber-nc)) to visualize the results of ballots in the National Council. Since only the current seating arrangement can be retrieved from the API, only the most recent voting results can be displayed correctly.
+
+### `ggswissparl` (Odata)
+The function `ggswissparl` uses the in-built data frame `seating_plan` 
+(based on the the [schematic representation of the National Council Hall](https://www.parlament.ch/en/organe/national-council/groups-chamber-nc)) 
+to visualize the results of ballots in the National Council. 
+Since only the current seating arrangement can be retrieved from the API, 
+only the most recent voting results can be displayed correctly.
 
 ``` r
 swissparl::get_data("Voting", Language = "DE", IdVote = 23458) %>% 
@@ -532,7 +524,7 @@ swissparl::get_data("Voting", Language = "DE", IdVote = 23458) %>%
 ```
 <img src="https://github.com/zumbov2/swissparl/blob/master/plots/poly2.png" width="500">  
 
-### `clean_text`
+### `clean_text` (Odata)
 Clears all texts of line breaks and all non-text-relevant annotations (page numbers).
 
 ``` r
@@ -542,6 +534,52 @@ swissparl::get_data("Transcript", Language = "DE", ID = 112146) %>%
 
 #> [1] "Auf diese Antwort habe ich mich schon den ganzen Sonntag gefreut. (Heiterkeit) Das zur Diskussion stehende gewürzte Fleisch von Tieren der Rindviehgattung wird unter der Zolltarifnummer 1602.5099 (Schlüssel 914) ausserhalb des Zollkontingentes veranlagt. Dem schweizerischen Zolltarif kommt Gesetzesrang zu. Er basiert wie die kombinierte Nomenklatur (KN) der EU und die meisten Zolltarife weltweit auf dem international gültigen Harmonisierten System (HS). Ebenfalls materiell verbindliches internationales Staatsvertragsrecht sind gemäss Rechtsprechung des Bundesverwaltungsgerichtes die Erläuterungen zum HS. Diese sehen vor, dass gewürztes Fleisch (z. B. mit Pfeffer) als zubereitet gilt und somit grundsätzlich zum Kapitel 16 des Zolltarifs gehört. An der Grenze zu vollziehende wirtschaftliche Massnahmen im Allgemeinen und die Höhe der Zollansätze im Besonderen stellen ausdrücklich keine Gründe dar, eine Ware nicht tarifgemäss einzureihen. In Anlehnung an Anmerkung 6a zum Kapitel 2 der KN hat die Zollverwaltung zusätzlich (Heiterkeit) sogenannte 'schweizerische Erläuterungen zum Zolltarif' (Grosse Heiterkeit, Beifall) publiziert. Danach werden gewisse Erzeugnisse noch im Kapitel 2 eingereiht, denen bei der Herstellung Würzstoffe zugesetzt worden sind, sofern dadurch der Charakter einer Ware dieses Kapitels nicht verändert wird (z. B. Bündnerfleisch). (Grosse Heiterkeit) Ausgeschlossen von diesem Kapitel bleibt hingegen Fleisch, bei dem die Würzstoffe auf allen Flächen des Erzeugnisses verteilt und mit blossem Auge wahrnehmbar sind. (Heiterkeit) Nach der Besprechung vom 26. März 2010 mit Vertretern des Bauernverbandes und der Fleischbranche hat die Zollverwaltung diese Erläuterungen inzwischen auf dem Zirkularweg ergänzt. Seit dem 3. Mai 2010 gehört mit ganzen Pfefferkörnern bestreutes Fleisch ebenfalls zum Kapitel 2 des Zolltarifs. Damit wird verhindert, dass Fleischstücke mit Zusatz von ganzen Pfefferkörnern zu den markant tieferen Zollansätzen des Kapitels 16 eingeführt werden können. Eine noch weiter gehende Ausdehnung des Geltungsbereichs des Kapitels 2 stünde in eindeutigem Widerspruch zu den HS-Bestimmungen und damit auch zu den völkerrechtlichen Verpflichtungen der Schweiz. (Heiterkeit) Die Zollverwaltung hat im Rahmen ihrer Kontrolltätigkeit zudem ein Risikoprofil betreffend die Veranlagung von gewürztem Fleisch erstellt. Die entsprechenden Veranlagungen werden somit noch genauer kontrolliert. Ein höherer Zollschutz gegenüber dem geltenden in der Tarifnummer 1602.5099 müsste aus heutiger Sicht in einem Dekonsolidierungsverfahren im Rahmen der WTO aufgrund der Forderungen der Hauptlieferländer durch Zollsenkungen in anderen Tarifnummern und/oder durch ein grösseres Zollkontingent für Rind- und Kalbfleisch kompensiert werden. Die Aussicht, dass ein Dekonsolidierungsverfahren insgesamt eine bessere Situation für die inländische Schlachtvieh- und Fleischbranche mit sich bringt, ist äusserst gering. Es trifft zu, dass die eingeführte Menge unter der Tarifnummer 1602.5099 im Laufe des Jahres 2010 zugenommen hat. Im Vergleich zum jährlichen gesamtschweizerischen Konsum von verkaufsfertigem Rind- und Kalbfleisch (112 000 Tonnen) erscheint die importierte Menge jedoch eher gering (815 Tonnen bis Ende Juni 2010). Herr Nationalrat, ich bitte Sie um Verzeihung, wenn ich bisweilen einfach nicht verstanden habe, was ich Ihnen vorgelesen habe. (Heiterkeit)"
 ```
+
+### Related data (OpenParlData)
+
+The OpenParlData API provides links to related tables/entities for many records.
+For example, when querying a person, the response may include links to related
+data such as memberships, affairs, votes, or speeches.
+
+#### `get_related_tables2()`
+Lists the names of related tables available for a given OpenParlData record.
+
+``` r
+res <- swissparl::get_data2("persons", firstname = "Gerhard", lastname = "Andrey")
+swissparl::get_related_tables2(res)
+#> 
+#>  [1] "access_badges"  "affairs"        "bodies"         "contributors"  
+#>  [5] "external_links" "interests"      "memberships"    "person_images" 
+#>  [9] "speeches"       "votes"
+```
+
+#### `get_related_data2()`
+
+Downloads the related data for a specified related table and returns it as a tibble.
+
+``` r
+res <- swissparl::get_data2("persons", firstname = "Gerhard", lastname = "Andrey")
+member_df <- swissparl::get_related_data2(res, table = "memberships")
+#>
+display <- c("external_id", "group_name_de", "role_name_de", "type_harmonized")
+member_df[,display]
+#>
+#> # A tibble: 44 × 4
+#>    external_id                        group_name_de role_name_de type_harmonized
+#>    <chr>                              <chr>         <chr>        <chr>          
+#>  1 CHE_interest_kultur_4245           Kultur        Mitglied     interest_group 
+#>  2 936edfe6-f8fd-4667-a986-ab5200aca… Gruppe Parla… Mitglied     committee_ad_h…
+#>  3 6f42fed7-0dc6-4ed7-b655-b391ad828… Gruppe Parla… Mitglied     committee_ad_h…
+#>  4 63898798-ac17-469f-bb21-5e562d76b… Gruppe Parla… Vizepräside… committee_ad_h…
+#>  5 28d9ed41-e55c-4c55-a1f3-ab1300c25… Büro NR       Stimmenzähl… committee      
+#>  6 CHE_interest_sustainable_finance_… Sustainable … Mitglied     interest_group 
+#>  7 CHE_interest_cyber_4245            Cyber         Mitglied     interest_group 
+#>  8 CHE_interest_wasserstoff/power-to… Wasserstoff/… Mitglied     interest_group 
+#>  9 CHE_interest_wald_und_holz_4245    Wald und Holz Mitglied     interest_group 
+#> 10 CHE_interest_startups_und_unterne… Startups und… Mitglied     interest_group 
+#> # ℹ 34 more rows
+```
+
 ## Possibly relevant queries (extended continuously)
 ### All speeches on a specific political business
 It is also possible to download all speech transcripts for a specific business. However, this requires a small detour. The first step is to extract when the business was discussed in the councils. This information is stored in the *SubjectBusiness* table.
