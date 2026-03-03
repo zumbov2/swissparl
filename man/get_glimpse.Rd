@@ -18,7 +18,7 @@ A tibble of different length and variable composition.
 }
 \description{
 \code{get_glimpse} retrieves the first rows of a table of the Swiss Parliament WebServices and
-    allows a first insight into the data structure.
+    allows a first insight into its data structure.
 }
 \examples{
 \dontrun{

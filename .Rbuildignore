@@ -1,0 +1,11 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^.*\.yml$
+^img$
+^README$
+^README\.md$
+^LICENSE\.md$
+^examples$
+^logo\.png$
+^old_ws$
+^plots$

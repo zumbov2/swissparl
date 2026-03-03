@@ -7,14 +7,17 @@
 get_variables(table, pb.pos = NULL, pb = NULL)
 }
 \arguments{
-\item{table}{name of the table to be searched. For an overview of available tables use \code{\link{get_tables}()}.}
+\item{table}{name of the table to be queried. For an 
+overview of available tables use \code{\link{get_tables}()}.}
 
-\item{pb.pos}{value for the progress bar. Not to be specified outside of \code{\link{get_overview}()}.}
+\item{pb.pos}{value for the progress bar. Not to be 
+specified outside of \code{\link{get_overview}()}.}
 
-\item{pb}{progress bar. Not to be specified outside of \code{\link{get_overview}()}.}
+\item{pb}{progress bar object. Not to be specified 
+outside of \code{\link{get_overview}()}.}
 }
 \value{
-A character vector that contains the names of the variables.
+A sorted character vector containing the names of the variables.
 }
 \description{
 \code{get_variables} retrieves the variable names of a table of the Swiss Parliament WebServices.

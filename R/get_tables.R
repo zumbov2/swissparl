@@ -6,7 +6,7 @@
 #' @importFrom dplyr pull
 #' @importFrom magrittr "%>%"
 #'
-#' @return A character vector that contains all the names of the available tables.
+#' @return A sorted character vector containing the names of the available tables.
 #'
 #' @export
 #'
@@ -27,3 +27,40 @@ get_tables <- function() {
   return(tables)
 
 }
+
+#' Retrieve available OpenParlData endpoints
+#'
+#' \code{get_tables2} retrieves the names of the main REST API endpoints
+#' provided by the OpenParlData.ch API.
+#'
+#' @importFrom jsonlite fromJSON
+#' @importFrom stringr str_extract str_remove
+#' @importFrom magrittr "%>%"
+#'
+#' @return A sorted character vector containing the names of the available
+#'   OpenParlData REST API endpoints.
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # Get all available OpenParlData endpoints
+#' get_tables2()
+#' }
+get_tables2 <- function() {
+  
+  spec <- jsonlite::fromJSON("https://api.openparldata.ch/openapi.json")
+  
+  main_endpoints <- 
+    names(spec[["paths"]]) %>% 
+    stringr::str_extract("^/v1/[^/]+") %>%
+    unique() %>% 
+    stringr::str_remove("/v1/") %>% 
+    sort()
+  
+  # Remove analytics
+  main_endpoints <- main_endpoints[!main_endpoints == "analytics"]
+    
+  return(main_endpoints)
+  
+  }

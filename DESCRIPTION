@@ -1,22 +1,26 @@
 Package: swissparl
 Type: Package
-Title: Interface to the Webservices of the Swiss Parliament
-Version: 0.2.2
+Title: Interface to the Webservices of the Swiss Parliament and the
+        OpenParlData.ch REST API
+Version: 0.3.0
 Authors@R: 
     c(person("David", "Zumbach", , "david.zumbach@gfzb.ch", c("aut", "cre")),
     person("Benjamin", "Gföhler", role = "ctb"))
-Description: Retrieves the most important data on parliamentary activities of the Swiss Federal Assembly via 
-    an open, machine-readable interface (see <https://ws.parlament.ch/odata.svc/>). 
-URL: https://www.parlament.ch/en/services/open-data-webservices
+Description: Provides machine-readable access to parliamentary data of the 
+    Swiss Federal Assembly via the official OData interface ([https://ws.parlament.ch/odata.svc/](https://ws.parlament.ch/odata.svc/)) 
+    and the OpenParlData REST API ([https://api.openparldata.ch](https://api.openparldata.ch)), which also 
+    offers harmonized data for selected cantonal and municipal parliaments.
+URL: https://www.parlament.ch/en/services/open-data-webservices,
+        https://api.openparldata.ch
 BugReports: https://github.com/zumbov2/swissparl/issues
-License: GPL (>= 2)
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.3.3
 Imports: dplyr, jsonlite, magrittr, purrr, stringr, tibble, tidyr,
-        crayon, httr, ggplot2
+        crayon, httr, ggplot2, glue, utils
 NeedsCompilation: no
-Packaged: 2021-11-01 07:39:16 UTC; david
+Packaged: 2026-03-03 13:32:11 UTC; DavidZumbach
 Author: David Zumbach [aut, cre],
   Benjamin Gföhler [ctb]
 Maintainer: David Zumbach <david.zumbach@gfzb.ch>

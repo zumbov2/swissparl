@@ -188,3 +188,148 @@ query_data <- function(args, pb_pos, table, package_size, pb, pb_max, stop, atte
   }
 
 }
+
+# Build query (openparldata)
+#' @importFrom utils URLencode
+build_query2 <- function(...) {
+  dots <- list(...)
+  
+  if (length(dots) == 0) return("")
+  if (is.null(names(dots)) || any(names(dots) == "")) {
+    stop("All arguments in ... must be named.", call. = FALSE)
+  }
+  
+  pairs <- Map(function(k, v) {
+    
+    # Collapse vectors into comma-separated string
+    if (length(v) > 1) {
+      v <- paste(v, collapse = ",")
+    }
+    
+    v <- as.character(v)
+    
+    key <- utils::URLencode(k, reserved = TRUE)
+    val <- utils::URLencode(v, reserved = TRUE)
+    
+    # Optional cosmetic unescaping
+    val <- gsub("%28", "(", val, fixed = TRUE)
+    val <- gsub("%29", ")", val, fixed = TRUE)
+    val <- gsub("%7C", "|", val, fixed = TRUE)
+    val <- gsub("%26", "&", val, fixed = TRUE)
+    
+    paste0(key, "=", val)
+    
+  }, names(dots), dots)
+  
+  paste(unlist(pairs, use.names = FALSE), collapse = "&")
+}
+
+# Fetch data (openparldata)
+#' @importFrom utils txtProgressBar setTxtProgressBar
+#' @importFrom jsonlite fromJSON
+#' @importFrom tibble as_tibble
+#' @importFrom glue glue
+fetch_data2 <- function(table, package_size = 1000, max_rows, silent = FALSE, ...) {
+  
+  query_extra <- build_query2(...)
+  
+  # First call
+  url <- glue::glue("https://api.openparldata.ch/v1/{table}?limit={package_size}&lang_format=flat")
+  if (nzchar(query_extra)) url <- paste0(url, "&", query_extra)
+  
+  # print(url)
+  
+  raw  <- jsonlite::fromJSON(url)
+  meta <- raw[["meta"]]
+  
+  if (missing(max_rows)) max_rows <- meta$total_records
+  max_rows <- min(max_rows, meta$total_records)
+  package_size <- min(package_size, max_rows)
+  
+  if (!silent) cat_entries(entries = max_rows, table = table)
+  
+  res <- tibble::as_tibble(raw[["data"]])
+  
+  if (meta$total_records > 0 && max_rows > nrow(res)) {
+    
+    if (!silent) {
+      pb <- utils::txtProgressBar(min = 0, max = ceiling(max_rows / package_size), style = 3)
+      pb_pos <- 1
+      utils::setTxtProgressBar(pb, pb_pos)
+    }
+    
+    while (nrow(res) < max_rows) {
+      
+      next_url <- meta$next_page
+      if (is.null(next_url) || !nzchar(next_url)) break
+      
+      raw  <- jsonlite::fromJSON(next_url)
+      meta <- raw[["meta"]]
+      
+      res <- dplyr::bind_rows(res, tibble::as_tibble(raw[["data"]]))
+      
+      if (!silent) {
+        pb_pos <- pb_pos + 1
+        utils::setTxtProgressBar(pb, pb_pos)
+      }
+    }
+    
+    if (!silent) close(pb)
+  }
+  
+  if (nrow(res) > max_rows) res <- res[seq_len(max_rows), , drop = FALSE]
+  
+  return(res)
+}
+
+# Fetch related data (openparldata)
+#' @importFrom glue glue
+#' @importFrom jsonlite fromJSON
+#' @importFrom tibble as_tibble
+#' @importFrom dplyr bind_rows
+#' @importFrom utils txtProgressBar setTxtProgressBar
+fetch_related_data2 <- function(url, package_size = 1000, silent = TRUE) {
+  
+  url <- glue::glue("{url}?lang_format=flat")
+  raw  <- jsonlite::fromJSON(url)
+  meta <- raw[["meta"]]
+  
+  max_rows <- meta$total_records
+  package_size <- min(package_size, max_rows)
+  
+  if (!silent) cat_entries(entries = max_rows, table = url)
+  
+  res <- tibble::as_tibble(raw[["data"]])
+  
+  if (meta$total_records > 0 && max_rows > nrow(res)) {
+    
+    if (!silent) {
+      pb <- utils::txtProgressBar(min = 0, max = ceiling(max_rows / package_size), style = 3)
+      pb_pos <- 1
+      utils::setTxtProgressBar(pb, pb_pos)
+    }
+    
+    while (nrow(res) < max_rows) {
+      
+      next_url <- meta$next_page
+      if (is.null(next_url) || !nzchar(next_url)) break
+      
+      raw  <- jsonlite::fromJSON(next_url)
+      meta <- raw[["meta"]]
+      
+      res <- dplyr::bind_rows(res, tibble::as_tibble(raw[["data"]]))
+      
+      if (!silent) {
+        pb_pos <- pb_pos + 1
+        utils::setTxtProgressBar(pb, pb_pos)
+      }
+    }
+    
+    if (!silent) close(pb)
+  }
+  
+  if (nrow(res) > max_rows) res <- res[seq_len(max_rows), , drop = FALSE]
+  
+  return(res)
+  
+}

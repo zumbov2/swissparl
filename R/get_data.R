@@ -154,3 +154,188 @@ get_data <- function(table, package_size = 1000, stop = T, attempts = 10, wtf = 
     }
 
 }
+
+#' Retrieve data from the OpenParlData.ch REST API
+#'
+#' \code{get_data2} retrieves data from the OpenParlData.ch REST API for a 
+#'    given resource.
+#'
+#' @param table name of the OpenParlData resource to download. For an overview of available
+#'   endpoints use \code{\link{get_tables2}()}.
+#' @param max_rows maximum number of rows to return. If omitted, all
+#'   available rows matching the query are downloaded.
+#' @param package_size number of rows to download per request (mapped to
+#'   the API parameter \code{limit}). Default is 1000. If the result set exceeds 
+#'   \code{package_size}, multiple requests are made using the API's pagination links.
+#' @param silent if \code{TRUE}, no progress bar and messages are displayed.
+#' @param ... additional query parameters passed to the OpenParlData endpoint as
+#'   URL query parameters. Common parameters include:
+#'   \itemize{
+#'     \item \code{search}: search query string.
+#'     \item \code{search_mode}: one of \code{"partial"} (default), \code{"exact"},
+#'       \code{"natural"}, \code{"boolean"}.
+#'     \item \code{search_scope}: where to search
+#'     \item \code{search_language}: language-specific search (\code{de}, \code{fr},
+#'       \code{it}, \code{rm}, \code{en}).
+#'     \item \code{sort_by}: field(s) to sort by; prefix with \code{-} for descending.
+#'   }
+#'   Resource-specific filters (e.g. \code{body_key}, \code{lang}, etc.) can also
+#'   be supplied. Multiple values can be provided as an R vector and are encoded
+#'   as a comma-separated query value (e.g. \code{body_key = c("AI", "AR")}).
+#'
+#' @return A tibble containing up to \code{max_rows} records. Column composition
+#'   depends on the selected resource and query parameters.
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # Retrieve first 10 persons
+#' get_data2("persons", max_rows = 10)
+#' 
+#' # Retrieve a specific person by first and last name
+#' get_data2(
+#'   "persons",
+#'   firstname = "Karin",
+#'   lastname = "Keller-Sutter"
+#' )
+#'
+#' # Partial search (default mode) in affairs
+#' get_data2("affairs", max_rows = 10, search = "Budget", search_mode = "partial")
+#'
+#' # Boolean search with grouping (note: '&' is an operator in boolean mode)
+#' get_data2(
+#'   "affairs",
+#'   max_rows = 10,
+#'   search = "(Klima | Umwelt) & Schweiz",
+#'   search_mode = "boolean"
+#' )
+#'
+#' # Combine search with scope/language and sorting
+#' get_data2(
+#'   "affairs",
+#'   max_rows = 10,
+#'   search = "Bundesrat Parlament",
+#'   search_mode = "natural",
+#'   search_language = "de",
+#'   sort_by = "-begin_date"
+#' )
+#'
+#'
+#' }
+get_data2 <- function(table, max_rows, package_size = 1000, silent = FALSE, ...) {
+  
+  fetch_data2(
+    table = table,
+    package_size = package_size,
+    max_rows = max_rows,
+    silent = silent,
+    ...
+  )
+}
+
+#' List related tables available
+#'
+#' \code{get_related_tables2} returns the names of related tables that
+#' are available for an OpenParlData record.
+#'
+#' @param res an OpenParlData record (typically one row) as returned by
+#'   \code{\link{get_data2}()}.
+#'
+#' @return A sorted character vector containing the names of available related
+#'   tables for the provided record.
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # Retrieve one person
+#' res <- get_data2("persons", firstname = "Gerhard", lastname = "Andrey")
+#'
+#' # List available related resources for that record
+#' get_related_tables2(res)
+#' }
+get_related_tables2 <- function(res) {
+  
+  sort(names(res[["links"]]))
+  
+}
+
+#' Retrieve related data for an OpenParlData record
+#'
+#' \code{get_related_data2} retrieves related records that are available for an
+#' OpenParlData record via its linked resources.
+#'
+#' The function downloads the related data for a specified related table and
+#' combines the results into a single tibble. If multiple entities are
+#' present, the function iterates over them and optionally displays a progress bar.
+#'
+#' @param res an OpenParlData record (typically one row) as returned by
+#'   \code{\link{get_data2}()}.
+#' @param table name of the related table to retrieve. Use
+#'   \code{\link{get_related_tables2}()} to see which related tables are available.
+#' @param silent if \code{TRUE}, no progress bar and messages are displayed.
+#'
+#' @return A tibble containing the related records.
+#'
+#' @importFrom purrr map_dfr
+#' @importFrom utils txtProgressBar setTxtProgressBar
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # Retrieve one person
+#' res <- get_data2("persons", firstname = "Gerhard", lastname = "Andrey")
+#'
+#' # List available related tables
+#' get_related_tables2(res)
+#'
+#' # Retrieve related data (replace "memberships" with an available table)
+#' get_related_data2(res, table = "memberships")
+#' }
+get_related_data2 <- function(res, table, silent = FALSE) {
+  
+  valid_tables <- get_related_tables2(res)
+  
+  if (!table %in% valid_tables) {
+    stop(
+      sprintf(
+        "Invalid related table '%s'. Available related tables: %s.",
+        table,
+        paste(valid_tables, collapse = ", ")
+      ),
+      call. = FALSE
+    )
+  }
+  
+  urls <- res[["links"]][[table]]
+  
+  if (length(urls) == 1) return(fetch_related_data2(url = urls))
+  
+  if (!silent) {
+    cat_related_entities(length(urls), table)
+    
+    pb <- utils::txtProgressBar(min = 0, max = length(urls), style = 3)
+    pb_pos <- 0
+    }
+  
+  out <- purrr::map_dfr(seq_along(urls), function(i) {
+    
+    result <- fetch_related_data2(url = urls[[i]])
+    
+    if (!silent) {
+      pb_pos <<- pb_pos + 1
+      utils::setTxtProgressBar(pb, pb_pos)
+      }
+    
+    result
+    
+    })
+  
+  if (!silent) close(pb)
+  
+  out
+}
+
+  

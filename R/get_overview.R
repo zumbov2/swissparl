@@ -36,7 +36,7 @@ get_overview <- function(silent = F) {
   # Get variables for each table
   res <- tibble::tibble(
     table = tables,
-    variable = purrr::map2(tables, 1:length(tables), get_variables, pb = pb)
+    variable = purrr::map2(tables, seq_along(tables), get_variables, pb = pb)
     ) %>%
     tidyr::unnest(cols = variable)
 
@@ -47,3 +47,60 @@ get_overview <- function(silent = F) {
   return(res)
 
 }
+
+#' Retrieve overview of all OpenParlData endpoints and fields
+#'
+#' \code{get_overview2} retrieves the names of the main resources provided by 
+#'    the OpenParlData.ch REST API and the fields they contain.
+#'
+#' @param silent if \code{TRUE}, no progress bar and messages are displayed.
+#'
+#' @return A tibble with the 2 columns \code{table} and \code{variable}.
+#'
+#' @importFrom tibble tibble
+#' @importFrom purrr map2
+#' @importFrom tidyr unnest
+#' @importFrom magrittr "%>%"
+#' @importFrom utils txtProgressBar
+#' @importFrom crayon silver
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # Overview for OpenParlData REST API
+#' get_overview2()
+#' }
+get_overview2 <- function(silent = F) {
+  
+  # Get available tables
+  tables <- get_tables2()
+  
+  # Feedback on progress
+  if (!silent) {
+    cat(crayon::silver("\n\n   Fetching data from 'https://api.openparldata.ch/v1/'", "\n\n"))
+    pb <- utils::txtProgressBar(1, length(tables), style = 3)
+    
+    } else {
+      
+      pb <- NULL
+      
+      }
+  
+  # Get variables for each table
+  res <- 
+    tibble::tibble(
+      table = tables,
+      variable = purrr::map2(tables, seq_along(tables), get_variables2, pb = pb)
+      ) %>%
+    tidyr::unnest(cols = variable)
+  
+  # Close Progress Bar
+  if (!silent) close(pb)
+  
+  # Return
+  return(res)
+  
+}
+
+

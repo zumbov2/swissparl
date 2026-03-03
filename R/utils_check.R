@@ -12,6 +12,25 @@ cat_entries <- function(entries, table) {
 
 }
 
+# Cat for number of related entities
+#' @importFrom crayon green silver
+#' @noRd
+cat_related_entities <- function(n, table) {
+  
+  if (n == 0) {
+    cat(crayon::silver("\n\n   No entries found.\n"))
+    return(invisible(NULL))
+  }
+  
+  if (n == 1) {
+    cat(crayon::green("\n\n   Fetching related data for 1 entry\n"))
+  } else {
+    cat(crayon::green(paste0("\n\n   Fetching related data for ", n, " entries\n")))
+  }
+  
+  cat(crayon::silver(paste0("   From table '", table, "'\n\n")))
+}
+
 # Check of http status
 #' @importFrom httr status_code http_status
 #' @noRd

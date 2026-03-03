@@ -7,7 +7,7 @@
 get_tables()
 }
 \value{
-A character vector that contains all the names of the available tables.
+A sorted character vector containing the names of the available tables.
 }
 \description{
 \code{get_tables} retrieves the names of the available tables of the Swiss Parliament WebServices.

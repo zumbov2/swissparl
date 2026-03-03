@@ -1,12 +1,17 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/swissparl)](https://cran.r-project.org/package=swissparl)
 ![Lifecycle](https://img.shields.io/badge/lifecycle-maturing-orange.svg)
-[![Build Status](https://travis-ci.org/zumbov2/swissparl.svg?branch=master)](https://travis-ci.org/zumbov2/swissparl)
-[![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![cranlogs](https://cranlogs.r-pkg.org/badges/grand-total/swissparl)](http://cran.rstudio.com/web/packages/swissparl/index.html)
 <img src="logo.png" height="120px" align="right" style="padding-left:10px;background-color:white;"/>
 
-# swissparl 
-This R package is an interface to the new, still unofficial and accordingly still undocumented [Webservices](https://ws.parlament.ch/odata.svc/) of [The Federal Assembly — The Swiss Parliament](https://www.parlament.ch/en) that offer an open, machine-readable interface to the most important data on parliamentary activities. The previous version of the package (interface to the old Webservices) can be found [here](https://github.com/zumbov2/swissparl/tree/master/old_ws).
+# swissparl
+This R package provides convenient access to parliamentary data of the Swiss 
+Federal Assembly via the official OData [Web Services](https://ws.parlament.ch/odata.svc/) 
+of the [Federal Assembly — The Swiss Parliament](https://www.parlament.ch/en). 
+
+Starting with version 0.3.0, the package also supports the 
+[OpenParlData.ch REST API](https://api.openparldata.ch/), which offers 
+harmonized parliamentary data for the Swiss Federal Assembly as well 
+as selected cantonal and municipal parliaments.
 
 ## Installation
 Version 0.2.2 is on CRAN and can be installed as follows:
@@ -15,7 +20,7 @@ Version 0.2.2 is on CRAN and can be installed as follows:
 install.packages("swissparl")
 ```
 
-The latest version is available on GitHub (0.2.2):
+The latest version is available on GitHub (0.3.0):
 
 ```r
 install.packages("devtools")
@@ -27,7 +32,7 @@ devtools::install_github("zumbov2/swissparl")
 The new [Webservices](https://ws.parlament.ch/odata.svc/) are comprehensive and not yet documented. The following functions will help you make friends with them:
 
 ### `get_tables`
-Retrieves the names of all available tables or datasets (currently 43).
+Retrieves the names of all available tables or datasets (currently 48).
 ``` r
 swissparl::get_tables()
 #> 
