@@ -613,7 +613,7 @@ Here are some examples of use:
 - **NZZ, 16.4.2021**: [Die Grünen machten im Parlament am meisten mit Corona Politik](https://www.nzz.ch/visuals/ld.1606433) | [Code](https://github.com/nzzdev/st-methods/tree/master/2107-parlamentsdebatte-corona)
 
 ## Similar libraries for other languages
-Python: [swissparlpy](https://github.com/metaodi/swissparlpy) by [Stefan Oderbolz](https://github.com/metaodi)
+Python: [swissparlpy](https://github.com/metaodi/swissparlpy) by [Stefan Oderbolz](https://github.com/metaodi) 
 JavaScript: [michaelschoenbaechler/swissparl](https://github.com/michaelschoenbaechler/swissparl) by [Michael Schönbächler](https://github.com/michaelschoenbaechler) 
 
 ## Suggested Citation
