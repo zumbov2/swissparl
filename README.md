@@ -197,7 +197,6 @@ swissparl::get_glimpse("Person", rows = 20)
 
 ``` r
 swissparl::get_glimpse2("persons", rows = 20)
-#>
 #> # A tibble: 20 × 62
 #>       id url_api      body_key external_id external_alternative…¹ title fullname
 #>    <int> <chr>        <chr>    <chr>       <lgl>                  <lgl> <chr>   
@@ -237,52 +236,43 @@ They can be used to download entire datasets or selected rows from any available
 OData table (`get_data`) or OpenParlData resource (`get_data2`).
 
 ``` r
-swissparl::get_data("Person", Language = "DE")
-#>
-#> # A tibble: 3,712 × 21
-#>       ID Language PersonNumber PersonIdCode Title TitleText           LastName  
-#>    <int> <chr>           <int>        <int> <int> <chr>               <chr>     
-#>  1     1 DE                  1         2200    NA <NA>                Aguet     
-#>  2     2 DE                  2         2002    NA <NA>                Allenspach
-#>  3     6 DE                  6         2004     9 dipl. Bauing. HTL   Aregger   
-#>  4     7 DE                  7         2005    NA <NA>                Aubry     
-#>  5     8 DE                  8         2008    NA <NA>                Bär       
-#>  6     9 DE                  9         2268    10 dipl. Ing. Agr. ETH Baumann   
-#>  7    10 DE                 10         2269     6 Dr. iur.            Baumberger
-#>  8    11 DE                 11         2011    12 lic. phil. I        Bäumlin   
-#>  9    12 DE                 12         2335   115 lic. iur.           Beerli    
-#> 10    13 DE                 13         2202     3 lic. en droit       Béguin    
-#> # ℹ 3,702 more rows
-#> # ℹ 14 more variables: GenderAsString <chr>, DateOfBirth <date>,
-#> #   DateOfDeath <date>, MaritalStatus <int>, MaritalStatusText <chr>,
-#> #   PlaceOfBirthCity <chr>, PlaceOfBirthCanton <chr>, Modified <dttm>,
-#> #   FirstName <chr>, OfficialName <chr>, MilitaryRank <int>,
-#> #   MilitaryRankText <chr>, NativeLanguage <chr>, NumberOfChildren <int>
+display <- c("InterestName", "LastName", "FirstName", "FunctionInAgencyText", "Paid")
+swissparl::get_data("PersonInterest", Language = "DE")[display]
+#> 
+#> # A tibble: 1,979 × 5
+#>    InterestName                    LastName FirstName FunctionInAgencyText Paid 
+#>    <chr>                           <chr>    <chr>     <chr>                <lgl>
+#>  1 Remaniement parcellaire la Bar… Stettler Thomas    Mitglied             TRUE 
+#>  2 Archiv für Agrargeschichte      Baderts… Christine Präsident(in)        FALSE
+#>  3 Arbeitsgruppe Ausschuss Nuklea… Hübscher Martin    Mitglied             FALSE
+#>  4 Zürcher Sprachheilschule, Unte… Pfister  Gerhard   Mitglied             FALSE
+#>  5 Groupe de réflexion Groupe Mut… Graber   Michael   Mitglied             TRUE 
+#>  6 Gönnerverein Hof Rickenbach     Wismer-… Priska    Mitglied             FALSE
+#>  7 Medical Advisory Board Saipient Balmer   Bettina   Beirat               FALSE
+#>  8 Verein Schwyzer Alumni          Blunschy Dominik   Präsident(in)        FALSE
+#>  9 Réseaux Thermiques Suisses      Weber    Céline    Präsident(in)        TRUE 
+#> 10 Gruyère Energie SA              Roth Pa… Marie-Fr… Mitglied             TRUE 
+#> # ℹ 1,969 more rows
 ```
 
 ``` r
-swissparl::get_data2("persons")
+display <- c("body_key", "type_name_de", "title_de")
+swissparl::get_data2("affairs", max_rows = 100)[display]
 #> 
-#> # A tibble: 25,004 × 62
-#>       id url_api      body_key external_id external_alternative…¹ title fullname
-#>    <int> <chr>        <chr>    <chr>       <chr>                  <chr> <chr>   
-#>  1 24862 https://api… 1024     10000003    <NA>                   <NA>  Andreas…
-#>  2 24863 https://api… 1024     10000004    <NA>                   <NA>  Annemar…
-#>  3 24864 https://api… 1024     10000005    <NA>                   <NA>  Armin B…
-#>  4 24865 https://api… 1024     10000007    <NA>                   <NA>  Christi…
-#>  5 24866 https://api… 1024     10000008    <NA>                   <NA>  Christi…
-#>  6 24867 https://api… 1024     10000009    <NA>                   <NA>  Christo…
-#>  7 24868 https://api… 1024     10000011    <NA>                   <NA>  Daniel …
-#>  8 24869 https://api… 1024     10000013    <NA>                   <NA>  Edi Sch…
-#>  9 24870 https://api… 1024     10000014    <NA>                   <NA>  Ernst W…
-#> 10 24871 https://api… 1024     10000015    <NA>                   <NA>  Eugen B…
-#> # ℹ 24,994 more rows
-#> # ℹ abbreviated name: ¹​external_alternative_id
-#> # ℹ 55 more variables: firstname <chr>, lastname <chr>, body_id <int>,
-#> #   party_de <chr>, party_fr <chr>, party_it <chr>, party_external_id <chr>,
-#> #   party_harmonized_de <chr>, party_harmonized_fr <chr>,
-#> #   party_harmonized_it <chr>, party_harmonized_en <chr>,
-#> #   party_harmonized_wikidata_id <chr>, website_parliament_url_de <chr>, …
+#> # A tibble: 100 × 3
+#>    body_key type_name_de         title_de                                       
+#>    <chr>    <chr>                <chr>                                          
+#>  1 3001     Volksinitiative      "Volksinitiative \"Keine neuen Tempo-30-Streck…
+#>  2 3001     Motion               "Motion \"Schulreglement Schule Herisau – Anpa…
+#>  3 3901     Politisches Geschäft "Fragestunde vom 5. März 2026 gemäss Art. 61 G…
+#>  4 3901     Politisches Geschäft "Vereidigung erstmals anwesender Stellvertrete…
+#>  5 TG       Weitere Geschäfte    "Bericht „Freiwilligenarbeit im Kanton Thurgau…
+#>  6 TG       Wahlgeschäft         "Ersatzwahl eines Mitglieds der Kommission für…
+#>  7 5586     <NA>                  <NA>                                          
+#>  8 5586     <NA>                  <NA>                                          
+#>  9 VD       <NA>                  <NA>                                          
+#> 10 5586     <NA>                  <NA>                                          
+#> # ℹ 90 more rows
 ```
 
 ### Subsetting with `...`
