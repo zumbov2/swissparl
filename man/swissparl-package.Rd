@@ -15,7 +15,7 @@ See the README on
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://www.parlament.ch/en/services/open-data-webservices}
+  \item \url{https://www.parlament.ch/de/\%c3\%bcber-das-parlament/fakten-und-zahlen/open-data-web-services}
   \item \url{https://api.openparldata.ch}
   \item Report bugs at \url{https://github.com/zumbov2/swissparl/issues}
 }
