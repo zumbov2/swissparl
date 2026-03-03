@@ -13,6 +13,8 @@ Starting with version 0.3.0, the package also supports the
 harmonized parliamentary data for the Swiss Federal Assembly as well 
 as selected cantonal and municipal parliaments.
 
+Functions ending in `2` access the OpenParlData API.
+
 ## Installation
 Version 0.2.2 is on CRAN and can be installed as follows:
 
@@ -28,37 +30,50 @@ devtools::install_github("zumbov2/swissparl")
 ```
 
 # Functions
+
 ## Helpers
-The new [Webservices](https://ws.parlament.ch/odata.svc/) are comprehensive and not yet documented. The following functions will help you make friends with them:
+
+The package provides helper functions for both supported interfaces:
+
+- Functions without suffix access the official Swiss Parliament OData Web Services.
+- Functions ending in `2` access the OpenParlData.ch REST API.
+
+The following functions help you explore the available tables and variables.
 
 ### `get_tables`
-Retrieves the names of all available tables or datasets (currently 48).
+Retrieves the names of all available OData tables (`get_tables`) and OpenParlData resources (`get_tables2`).
+
 ``` r
 swissparl::get_tables()
-#> 
-#>  [1] "Bill"                   "BillLink"              
-#>  [3] "BillStatus"             "Business"              
-#>  [5] "BusinessResponsibility" "BusinessRole"          
-#>  [7] "BusinessStatus"         "BusinessType"          
-#>  [9] "Canton"                 "Citizenship"           
-#> [11] "Committee"              "Council"               
-#> [13] "External"               "LegislativePeriod"     
-#> [15] "Meeting"                "MemberCommittee"       
-#> [17] "MemberCommitteeHistory" "MemberCouncil"         
-#> [19] "MemberCouncilHistory"   "MemberParlGroup"       
-#> [21] "MemberParty"            "Objective"             
-#> [23] "ParlGroup"              "ParlGroupHistory"      
-#> [25] "Party"                  "Person"                
-#> [27] "PersonAddress"          "PersonCommunication"   
-#> [29] "PersonEmployee"         "PersonInterest"        
-#> [31] "PersonOccupation"       "Preconsultation"       
-#> [33] "Publication"            "RelatedBusiness"       
-#> [35] "Resolution"             "SeatOrganisationNr"    
-#> [37] "Session"                "Subject"               
-#> [39] "SubjectBusiness"        "Tags"                  
-#> [41] "Transcript"             "Vote"                  
-#> [43] "Voting"
+#>
+#>  [1] "Bill"                   "BillLink"               "BillStatus"            
+#>  [4] "Business"               "BusinessResponsibility" "BusinessRole"          
+#>  [7] "BusinessStatus"         "BusinessType"           "Canton"                
+#> [10] "Citizenship"            "Committee"              "Council"               
+#> [13] "External"               "LegislativePeriod"      "Meeting"               
+#> [16] "MemberCommittee"        "MemberCommitteeHistory" "MemberCouncil"         
+#> [19] "MemberCouncilHistory"   "MemberParlGroup"        "MemberParlGroupHistory"
+#> [22] "MemberParty"            "MemberPartyHistory"     "Mutation"              
+#> [25] "Objective"              "ParlGroup"              "ParlGroupHistory"      
+#> [28] "Party"                  "Person"                 "PersonAddress"         
+#> [31] "PersonCommunication"    "PersonEmployee"         "PersonInterest"        
+#> [34] "PersonOccupation"       "Preconsultation"        "Publication"           
+#> [37] "Rapporteur"             "RelatedBusiness"        "Resolution"            
+#> [40] "SeatOrganisationNr"     "SeatOrganisationSr"     "Session"               
+#> [43] "Subject"                "SubjectBusiness"        "Tags"                  
+#> [46] "Transcript"             "Vote"                   "Voting"
 ```
+
+``` r
+swissparl::get_tables2()
+#>
+#>  [1] "access_badges"  "affairs"        "agendas"        "bodies"        
+#>  [5] "contributors"   "docs"           "events"         "external_links"
+#>  [9] "groups"         "interests"      "meetings"       "memberships"   
+#> [13] "person_images"  "persons"        "speeches"       "texts"         
+#> [17] "votes"          "votings"
+```
+
 ### `get_variables` 
 Retrieves the names of all the variables of a given table.
 ``` r
