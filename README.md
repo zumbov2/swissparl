@@ -33,11 +33,6 @@ devtools::install_github("zumbov2/swissparl")
 
 ## Helpers
 
-The package provides helper functions for both supported interfaces:
-
-- Functions without suffix access the official Swiss Parliament OData Web Services.
-- Functions ending in `2` access the OpenParlData.ch REST API.
-
 The following functions help you explore the available tables and variables.
 
 ### `get_tables`
@@ -617,8 +612,9 @@ Here are some examples of use:
 ## Use Cases
 - **NZZ, 16.4.2021**: [Die Grünen machten im Parlament am meisten mit Corona Politik](https://www.nzz.ch/visuals/ld.1606433) | [Code](https://github.com/nzzdev/st-methods/tree/master/2107-parlamentsdebatte-corona)
 
-## swissparl for Python
-[swissparlpy](https://github.com/metaodi/swissparlpy) by [Stefan Oderbolz](https://github.com/metaodi)
+## Similar libraries for other languages
+Python: [swissparlpy](https://github.com/metaodi/swissparlpy) by [Stefan Oderbolz](https://github.com/metaodi)
+JavaScript: [michaelschoenbaechler/swissparl](https://github.com/michaelschoenbaechler/swissparl) by [Michael Schönbächler](https://github.com/michaelschoenbaechler) 
 
 ## Suggested Citation
 Zumbach, David (2026). swissparl: Interface to the Webservices of the Swiss Parliament. R package version 0.3.0. https://CRAN.R-project.org/package=swissparl
