@@ -1,6 +1,6 @@
 #' swissparl: The Swiss Parliament Webservices R API
 #'
-#' The Swiss Parliament Webservices R API.
+#' Interface to Swiss Parliament Web Services and the 'OpenParlData' API
 #'
 #' See the README on
 #' \href{https://github.com/zumbov2/swissparl#readme}{GitHub}

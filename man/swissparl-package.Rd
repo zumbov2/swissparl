@@ -6,7 +6,7 @@
 \alias{swissparl-package}
 \title{swissparl: The Swiss Parliament Webservices R API}
 \description{
-The Swiss Parliament Webservices R API.
+Interface to Swiss Parliament Web Services and the 'OpenParlData' API
 }
 \details{
 See the README on
@@ -16,7 +16,7 @@ See the README on
 Useful links:
 \itemize{
   \item \url{https://www.parlament.ch/de/\%c3\%bcber-das-parlament/fakten-und-zahlen/open-data-web-services}
-  \item \url{https://api.openparldata.ch}
+  \item \url{https://api.openparldata.ch/documentation}
   \item Report bugs at \url{https://github.com/zumbov2/swissparl/issues}
 }
 
