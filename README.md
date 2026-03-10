@@ -16,7 +16,7 @@ as selected cantonal and municipal parliaments.
 Functions ending in `2` access the OpenParlData API.
 
 ## Installation
-Version 0.2.2 is on CRAN and can be installed as follows:
+Version 0.3.0 is on CRAN and can be installed as follows:
 
 ```r
 install.packages("swissparl")
